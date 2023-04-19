@@ -1,0 +1,64 @@
+.header {
+    height: 137px;
+    width: 100%;
+    padding-inline: 40px;
+    border-bottom: 1px solid #F6F6F6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    & > .storeInfo {
+        margin-left: 30px;
+        display: flex;
+        & > div {
+            margin-left: 17px;
+            h2 {
+                font-size: 24px;
+                font-weight: 800;
+                line-height: 29px;
+                letter-spacing: 0.01em;
+                text-transform: uppercase;
+            }
+            p {
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 19px;
+                text-align: left;
+                color: #7b7b7b;
+            }
+        }
+    }
+    & > .cartInfo {
+        min-width: 150px;
+        height: 50px;
+        padding: 15px 20px;
+        border-radius: 30px;
+        background-color: #fe5f1e;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &::after {
+            content: "";
+            width: 1px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.25);
+            position: absolute;
+            z-index: 1;
+            top: 25%;
+            left: 50%;
+        }
+        & p {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 19px;
+            color: #fff;
+        }
+        & > div {
+            display: flex;
+            gap: 8px;
+        }
+        & > div > svg {
+            transform: translateY(-1px);
+        }
+    }
+}
