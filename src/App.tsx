@@ -1,12 +1,31 @@
+import { FC, useState, useEffect } from "react";
+import { Header, Categories, Sort, PizzasList } from "./components";
+
 import "./app.scss";
-import Header from "./components/Header";
-import Categories from "./components/Categories";
-import Sort from "./components/Sort";
-import PizzasList from "./components/PizzasList";
 
-import pizzas from "./pizzas.json";
+import { IPizza } from "./types/types";
 
-const App = () => {
+import axios from "axios";
+axios.defaults.baseURL = "http://localhost:3000";
+
+const App: FC = () => {
+  const [products, setProducts] = useState<IPizza[]>([]);
+  const [isFetching, setIsFetching] = useState(true);
+  const getPizzas = async () => {
+    const pizzas = await axios.get<IPizza[]>("/products");
+    setProducts(pizzas.data)
+  };
+
+  useEffect(() => {
+    try {
+      getPizzas();
+    } catch (e) {
+     console.log(e) 
+    } finally {
+      setIsFetching(false)
+    }
+  }, []);
+
   return (
     <main>
       <Header />
@@ -16,7 +35,7 @@ const App = () => {
       </div>
       <section className="list_container">
         <h1>Усі піци</h1>
-        <PizzasList items={pizzas} />
+        <PizzasList items={products} isFetching={isFetching}/>
       </section>
     </main>
   );

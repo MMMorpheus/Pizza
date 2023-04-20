@@ -6,7 +6,7 @@ const sort: string[] = ["рейтингом", "ціною", "алфавітом"
 
 const Sort: FC<ISort> = () => {
   const [currentOption, setCurrentOption] = useState(0);
-  const [isOpened, setIsOpened] = useState(true);
+  const [isOpened, setIsOpened] = useState(false);
 
   return (
     <div className="sort_options">
