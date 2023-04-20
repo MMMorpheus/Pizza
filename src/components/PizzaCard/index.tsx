@@ -30,9 +30,9 @@ const PizzaCard: FC<PizzaCardProps> = ({
             }}>{DoughtType[type]}</li>;
           })}
         </ul>
-        <ul>{sizes.map(size => {
-            return <li key={size} className={activeSize === sizes.indexOf(size) ? '_active' : ''} onClick={() => {
-                handleSize(sizes.indexOf(size))
+        <ul>{sizes.map((size, i) => {
+            return <li key={size} className={activeSize === i ? '_active' : ''} onClick={() => {
+                handleSize(i)
             }}>{size} см.</li>
         })}</ul>
       </div>
