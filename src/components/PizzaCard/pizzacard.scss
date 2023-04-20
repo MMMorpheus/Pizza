@@ -13,50 +13,70 @@
         line-height: 24px;
         letter-spacing: 0.01em;
         text-align: center;
-        max-width: 271px;    
+        max-width: 271px;
+        margin-bottom: 22px;
     }
 }
 .options {
+    width: 280px;
     height: 85px;
     padding: 7px;
     border-radius: 10px;
     background: #f3f3f3;
-    & > div {
+    & > ul {
         height: 50%;
         display: flex;
         justify-content: space-evenly;
         align-items: center;
         margin-bottom: 2px;
     }
-    & > div > div {
-        height: 32px;
+    & > ul > li {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 17px;
+        letter-spacing: 0.015em;
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        cursor: pointer;
-    }
-    & > div:first-child > div {
-        width: 130px;
-    }
-    & > div:last-child > div {
-        width: 85px;
     }
 }
-.variant {
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 17px;
-    letter-spacing: 0.015em;
-    text-align: center;
-    opacity: 0.5;
-    position: relative;
-}
-
-.variant_available {
-    opacity: 1;
-}
-
-.variant_active {
+._active {
     background-color: #fff;
     border-radius: 5px;
+}
+.price {
+    margin-top: 17px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 27px;
+        letter-spacing: 0.015em;
+    }
+    button {
+        width: 155px;
+        height: 40px;
+        border: 1px solid #eb5a1e;
+        border-radius: 30px;
+        background-color: #fff;
+        color: #eb5a1e;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 19px;
+        cursor: pointer;
+        transition: color 0.3s ease;
+        transition: background-color 0.3s ease;
+    }
+    button:hover {
+        background-color: #eb5a1e;
+        color: #fff;
+    }
 }
