@@ -14,7 +14,12 @@ export enum DoughtType {
   традиційне,
 }
 
+export enum Order {
+  asc = "asc",
+  desc = "desc"
+}
+
 export interface IFilterOption {
-  title: string,
-  option: number
+  title: string;
+  option: number;
 }

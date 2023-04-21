@@ -1,6 +1,6 @@
 import { FC, useState, useEffect } from "react";
 import { Categories, Sort, PizzasList } from "../../components";
-import { IFilterOption, IPizza } from "../../types/types";
+import { IFilterOption, IPizza, Order } from "../../types/types";
 
 import axios from "axios";
 axios.defaults.baseURL = "http://localhost:3000";
@@ -19,8 +19,10 @@ const Home: FC = () => {
   const [products, setProducts] = useState<IPizza[]>([]);
   const [isFetching, setIsFetching] = useState(true);
 
-  async function getPizzas(i: IFilterOption, o:string) {
-    const pizzas = await axios.get<IPizza[]>(`/products?${query(i)}${sorter(o)}`);
+  async function getPizzas(category: IFilterOption, option: string, order:string) {
+    const pizzas = await axios.get<IPizza[]>(
+      `/products?${query(category)}${sorter(option, order)}`
+    );
     setProducts(pizzas.data);
   }
 
@@ -34,6 +36,15 @@ const Home: FC = () => {
   const [currentOption, setCurrentOption] = useState(options[0]);
   const handleOption = (i: number): void => {
     setCurrentOption(options[i]);
+  };
+
+  const [order, setOrder] = useState(Order.asc);
+  const handleOrder = (): void => {
+    if (order === "asc") {
+      setOrder(Order.desc);
+    } else {
+      setOrder(Order.asc);
+    }
   };
 
   function query(i: IFilterOption): string {
@@ -61,17 +72,17 @@ const Home: FC = () => {
     return param;
   }
 
-  function sorter(opt: string): string {
+  function sorter(opt: string, order: string): string {
     let param: string = "";
     switch (opt) {
       case "рейтингом":
-        param = "&_sort=rating&_order=asc";
+        param = `&_sort=rating&_order=${order}`;
         break;
       case "ціною":
-        param = "&_sort=price&_order=asc";
+        param = `&_sort=price&_order=${order}`;
         break;
       case "алфавітом":
-        param = "&_sort=title&_order=asc";
+        param = `&_sort=title&_order=${order}`;
         break;
     }
     return param;
@@ -80,13 +91,13 @@ const Home: FC = () => {
   useEffect(() => {
     try {
       setIsFetching(true);
-      getPizzas(currentCategory, currentOption);
+      getPizzas(currentCategory, currentOption, order);
     } catch (e) {
       console.log(e);
     } finally {
       setIsFetching(false);
     }
-  }, [currentCategory, currentOption]);
+  }, [currentCategory, currentOption, order]);
 
   return (
     <>
@@ -96,13 +107,17 @@ const Home: FC = () => {
           current={currentCategory}
           change={handleCategory}
         />
-        <Sort items={options} current={currentOption} change={handleOption} />
+        <Sort
+          items={options}
+          current={currentOption}
+          change={handleOption}
+          changeOrder={handleOrder}
+        />
       </div>
       <section className="list_container">
-        <h1>Усі піци</h1>
+        <h1>{currentCategory.title}</h1>
         <PizzasList items={products} isFetching={isFetching} />
       </section>
-      ;
     </>
   );
 };
