@@ -1,20 +1,24 @@
-import * as React from 'react';
+import {FC, useState} from 'react';
+import { IFilterOption } from '../../types/types';
 import './categories.scss'
 
-export interface IAppProps {
+export interface ICategories {
+  items: IFilterOption[],
+  current: IFilterOption,
+  change: (i:number) => void
 }
 
-export default function Categories (props: IAppProps) {
-    const categories: string[] = ['Усі', 'М\'ясні', 'Вегетаріанська', 'Гриль', 'Гострі', 'Закриті']
+const Categories:FC<ICategories> = ({items, current, change}) => {
 
-    const [currentIndex, setCurrentIndex] = React.useState(0);
   return (
     <div>
       <ul className='categories'>
-        {categories.map((item, i) => {
-            return <li className={currentIndex === i ? 'active' : ''} onClick={() => {setCurrentIndex(i)}} key={i}>{item}</li>
+        {items.map((item, i) => {
+            return <li className={items.indexOf(current) === i ? 'active' : ''} onClick={() => {change(i)}} key={i}>{item.title}</li>
         })}
       </ul>
     </div>
   );
 }
+
+export default Categories;
