@@ -1,11 +1,16 @@
 import { FC, useState } from "react";
 import "./sort.scss";
 
-interface ISort {}
-const sort: string[] = ["рейтингом", "ціною", "алфавітом"];
+interface ISort {
+  items: string[],
+  current: string,
+  change: (i: number) => void
 
-const Sort: FC<ISort> = () => {
-  const [currentOption, setCurrentOption] = useState(0);
+}
+
+
+const Sort: FC<ISort> = ({items, current, change}) => {
+
   const [isOpened, setIsOpened] = useState(false);
 
   return (
@@ -18,17 +23,17 @@ const Sort: FC<ISort> = () => {
             setIsOpened(!isOpened);
           }}
         >
-          {sort[currentOption]}
+          {current}
         </span>
       </div>
       {isOpened && (
         <ul className="popup">
-          {sort.map((opt, i) => {
+          {items.map((opt, i) => {
             return (
               <li
                 key={i}
                 onClick={() => {
-                  setCurrentOption(i);
+                  change(i);
                   setIsOpened(false);
                 }}
               >

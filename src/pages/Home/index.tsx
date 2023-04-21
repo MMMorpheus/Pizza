@@ -13,14 +13,16 @@ const categories: IFilterOption[] = [
   { title: "Вегетаріанські", option: 4 },
   { title: "Закриті", option: 5 },
 ];
+const options: string[] = ["рейтингом", "ціною", "алфавітом"];
 
 const Home: FC = () => {
   const [products, setProducts] = useState<IPizza[]>([]);
   const [isFetching, setIsFetching] = useState(true);
-  async function getPizzas (i: IFilterOption) {
-    const pizzas = await axios.get<IPizza[]>(`/products${query(i)}`);
+
+  async function getPizzas(i: IFilterOption, o:string) {
+    const pizzas = await axios.get<IPizza[]>(`/products?${query(i)}${sorter(o)}`);
     setProducts(pizzas.data);
-  };
+  }
 
   const [currentCategory, setCurrentCategory] = useState<IFilterOption>(
     categories[0]
@@ -29,8 +31,13 @@ const Home: FC = () => {
     setCurrentCategory(categories[i]);
   };
 
-  function query (i: IFilterOption): string {
-    let param: string = "?category_like";
+  const [currentOption, setCurrentOption] = useState(options[0]);
+  const handleOption = (i: number): void => {
+    setCurrentOption(options[i]);
+  };
+
+  function query(i: IFilterOption): string {
+    let param: string = "category_like";
     switch (i.option) {
       case 0:
         param = "";
@@ -52,17 +59,34 @@ const Home: FC = () => {
         break;
     }
     return param;
-  };
+  }
+
+  function sorter(opt: string): string {
+    let param: string = "";
+    switch (opt) {
+      case "рейтингом":
+        param = "&_sort=rating&_order=asc";
+        break;
+      case "ціною":
+        param = "&_sort=price&_order=asc";
+        break;
+      case "алфавітом":
+        param = "&_sort=title&_order=asc";
+        break;
+    }
+    return param;
+  }
 
   useEffect(() => {
     try {
-      getPizzas(currentCategory);
+      setIsFetching(true);
+      getPizzas(currentCategory, currentOption);
     } catch (e) {
       console.log(e);
     } finally {
       setIsFetching(false);
     }
-  }, [currentCategory]);
+  }, [currentCategory, currentOption]);
 
   return (
     <>
@@ -72,7 +96,7 @@ const Home: FC = () => {
           current={currentCategory}
           change={handleCategory}
         />
-        <Sort />
+        <Sort items={options} current={currentOption} change={handleOption} />
       </div>
       <section className="list_container">
         <h1>Усі піци</h1>
