@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
-import { DoughtType, IPizza } from "../../types/types";
+import { DoughtType} from "../../types/types";
+import { IPizza } from "../../redux/models/IPizza";
 import "./pizzacard.scss";
 
 interface PizzaCardProps {

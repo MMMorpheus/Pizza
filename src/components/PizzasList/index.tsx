@@ -3,7 +3,7 @@ import PizzaCard from "../PizzaCard";
 import "./pizzaslist.scss";
 import { Skeleton } from "../../components";
 
-import { IPizza } from "../../types/types";
+import { IPizza } from "../../redux/models/IPizza";
 
 interface IPizzasList {
   items: IPizza[];

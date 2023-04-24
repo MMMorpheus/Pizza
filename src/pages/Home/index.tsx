@@ -1,8 +1,11 @@
 import { FC, useState, useEffect } from "react";
 import { Categories, Sort, PizzasList } from "../../components";
-import { IFilterOption, IPizza, Order } from "../../types/types";
+import { IFilterOption, Order } from "../../types/types";
+import { IPizza } from "../../redux/models/IPizza";
 
 import axios from "axios";
+import { useAppDispach, useAppSelector } from "../../hooks/redux";
+import { fetchPizzas } from "../../redux/slices/ActionsCreator";
 axios.defaults.baseURL = "http://localhost:3000";
 
 const categories: IFilterOption[] = [
@@ -16,6 +19,10 @@ const categories: IFilterOption[] = [
 const options: string[] = ["рейтингом", "ціною", "алфавітом"];
 
 const Home: FC = () => {
+  const dispatch = useAppDispach();
+  const {pizzas, isLoading, error} = useAppSelector(state => state.pizzasReduser)
+ 
+
   const [products, setProducts] = useState<IPizza[]>([]);
   const [isFetching, setIsFetching] = useState(true);
 
@@ -88,16 +95,20 @@ const Home: FC = () => {
     return param;
   }
 
-  useEffect(() => {
-    try {
-      setIsFetching(true);
-      getPizzas(currentCategory, currentOption, order);
-    } catch (e) {
-      console.log(e);
-    } finally {
-      setIsFetching(false);
-    }
-  }, [currentCategory, currentOption, order]);
+  // useEffect(() => {
+  //   try {
+  //     setIsFetching(true);
+  //     getPizzas(currentCategory, currentOption, order);
+  //   } catch (e) {
+  //     console.log(e);
+  //   } finally {
+  //     setIsFetching(false);
+  //   }
+  // }, [currentCategory, currentOption, order]);
+
+  useEffect (() => {
+    dispatch(fetchPizzas())
+  }, [])
 
   return (
     <>
@@ -116,7 +127,7 @@ const Home: FC = () => {
       </div>
       <section className="list_container">
         <h1>{currentCategory.title}</h1>
-        <PizzasList items={products} isFetching={isFetching} />
+        <PizzasList items={pizzas} isFetching={isLoading} />
       </section>
     </>
   );
