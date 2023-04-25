@@ -26,9 +26,9 @@ const Categories: FC<ICategories> = ({}) => {
           return (
             <li
               key={i}
-              className={category === item.option ? "active" : ""}
+              className={category.option === item.option ? "active" : ""}
               onClick={() => {
-                changeCategory(item.option);
+                changeCategory(item);
               }}
             >
               {item.title}

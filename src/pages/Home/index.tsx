@@ -9,30 +9,13 @@ import { fetchPizzas } from "../../redux/slices/ActionsCreator";
 axios.defaults.baseURL = "http://localhost:3000";
 
 
-const options: string[] = ["рейтингом", "ціною", "алфавітом"];
 
 const Home: FC = () => {
   const dispatch = useAppDispach();
   const {pizzas, isLoading, error} = useAppSelector(state => state.pizzasReduser)
+  const {title} = useAppSelector(state => state.optionsReducer.category)
  
-  // async function getPizzas(category: IFilterOption, option: string, order:string) {
-  //   const pizzas = await axios.get<IPizza[]>(
-  //     `/products?${query(category)}${sorter(option, order)}`
-  //   );
-  // }
-
-  // const [currentCategory, setCurrentCategory] = useState<IFilterOption>(
-  //   categories[0]
-  // );
-  // const handleCategory = (i: number): void => {
-  //   setCurrentCategory(categories[i]);
-  // };
-
-  const [currentOption, setCurrentOption] = useState(options[0]);
-  const handleOption = (i: number): void => {
-    setCurrentOption(options[i]);
-  };
-
+  
   const [order, setOrder] = useState(Order.asc);
   const handleOrder = (): void => {
     if (order === "asc") {
@@ -91,20 +74,11 @@ const Home: FC = () => {
   return (
     <>
       <div className="options_container">
-        <Categories
-          // items={categories}
-          // current={currentCategory}
-          // change={handleCategory}
-        />
-        <Sort
-          items={options}
-          current={currentOption}
-          change={handleOption}
-          changeOrder={handleOrder}
-        />
+        <Categories />
+        <Sort />
       </div>
       <section className="list_container">
-        {/* <h1>{currentCategory.title}</h1> */}
+        <h1>{title}</h1>
         <PizzasList items={pizzas} isFetching={isLoading} />
       </section>
     </>

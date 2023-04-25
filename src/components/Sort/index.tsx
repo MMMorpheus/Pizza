@@ -1,15 +1,22 @@
 import { FC, useState } from "react";
+import { useAppSelector } from "../../hooks/redux";
+import { useActions } from "../../hooks/useActions";
+import { IOption } from "../../types/types";
 import "./sort.scss";
 
-interface ISort {
-  items: string[];
-  current: string;
-  change: (i: number) => void;
-  changeOrder: () => void;
-}
+interface ISort {}
 
-const Sort: FC<ISort> = ({ items, current, change, changeOrder }) => {
+const options: IOption[] = [
+  { title: "рейтингом", query: "rating" },
+  { title: "ціною", query: "price" },
+  { title: "алфавітом", query: "title" },
+];
+
+const Sort: FC<ISort> = () => {
   const [isOpened, setIsOpened] = useState(false);
+
+  const { sortOption } = useAppSelector((state) => state.optionsReducer);
+  const { changeOption, toggleOrder } = useActions();
 
   return (
     <div className="sort_options">
@@ -22,9 +29,11 @@ const Sort: FC<ISort> = ({ items, current, change, changeOrder }) => {
             setIsOpened(!isOpened);
           }}
         >
-          {current}
+          {sortOption.title}
         </span>
-        <svg className="order" onClick={changeOrder}
+        <svg
+          className="order"
+          onClick={() => {}}
           enableBackground="new 0 0 100 100"
           id="Layer_1"
           version="1.1"
@@ -45,16 +54,16 @@ const Sort: FC<ISort> = ({ items, current, change, changeOrder }) => {
       </div>
       {isOpened && (
         <ul className="popup">
-          {items.map((opt, i) => {
+          {options.map((opt, i) => {
             return (
               <li
                 key={i}
                 onClick={() => {
-                  change(i);
+                  changeOption(opt);
                   setIsOpened(false);
                 }}
               >
-                {opt}
+                {opt.title}
               </li>
             );
           })}
