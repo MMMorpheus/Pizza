@@ -28,6 +28,20 @@
         }
     }
     & > label {
+        position: relative;
+        & > svg {
+            color: #a19d9d;
+            position: absolute;
+            cursor: pointer;
+        }
+        & > .searchIcon {
+            top: 8px;
+            left: 5px;
+        }
+        & > .resetIcon {
+            top: 15px;
+            right: 115px;
+        }
         & > input {
             margin-right: 100px;
             width: 350px;
@@ -35,7 +49,11 @@
             border: 1px solid #f3f3f3;
             border-radius: 10px;
             outline: none;
-            text-indent: 30px;
+            text-indent: 40px;
+            font-size: 18px;
+            &::placeholder {
+                font-size: 16px;
+            }
         }
     }
     & > .cartInfo {

@@ -3,11 +3,14 @@ import { useAppSelector } from "../../hooks/redux";
 import { useActions } from "../../hooks/useActions";
 import "./header.scss";
 
+import { DebounceInput } from "react-debounce-input";
+
 export interface IAppProps {}
 
 const Header: FC = () => {
   const { setSearchValue } = useActions();
   const { searchValue } = useAppSelector((state) => state.optionsReducer);
+
   return (
     <header className="header">
       <div className="storeInfo">
@@ -18,14 +21,30 @@ const Header: FC = () => {
         </div>
       </div>
       <label>
-        <input
+        <svg className="searchIcon" fill="currentColor">
+          <path d="M27.414,24.586l-5.077-5.077C23.386,17.928,24,16.035,24,14c0-5.514-4.486-10-10-10S4,8.486,4,14  s4.486,10,10,10c2.035,0,3.928-0.614,5.509-1.663l5.077,5.077c0.78,0.781,2.048,0.781,2.828,0  C28.195,26.633,28.195,25.367,27.414,24.586z M7,14c0-3.86,3.14-7,7-7s7,3.14,7,7s-3.14,7-7,7S7,17.86,7,14z" />
+        </svg>
+        <DebounceInput
           type="text"
           placeholder="Пошук за назвою..."
           value={searchValue}
-          onChange={(e) => {
+          debounceTimeout={500}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setSearchValue(e.target.value);
           }}
         />
+        <svg
+          className="resetIcon"
+          height="20"
+          viewBox="0 0 200 200"
+          width="20"
+          fill="currentColor"
+          onClick={() => {
+            setSearchValue("");
+          }}
+        >
+          <path d="M114,100l49-49a9.9,9.9,0,0,0-14-14L100,86,51,37A9.9,9.9,0,0,0,37,51l49,49L37,149a9.9,9.9,0,0,0,14,14l49-49,49,49a9.9,9.9,0,0,0,14-14Z" />
+        </svg>
       </label>
       <div className="cartInfo">
         <p>320 &#8372;</p>

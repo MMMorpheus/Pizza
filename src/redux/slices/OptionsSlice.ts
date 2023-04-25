@@ -53,9 +53,9 @@ const OptionsSlice = createSlice({
     },
     setSearchValue(state, action: PayloadAction<string>) {
       state.searchValue = action.payload.toLowerCase();
-      if(!state.haveChanged) {
-        state.haveChanged = true;
-      }
+      // if(!state.haveChanged && state.searchValue ) {
+      //   state.haveChanged = true;
+      // }
     },
     setDefaultOptions(state) {
       state.category = { title: "Усі", option: 0 };
