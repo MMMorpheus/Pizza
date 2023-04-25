@@ -1,24 +1,43 @@
-import {FC, useState} from 'react';
-import { IFilterOption } from '../../types/types';
-import './categories.scss'
+import { FC } from "react";
+import { useAppSelector } from "../../hooks/redux";
+import { useActions } from "../../hooks/useActions";
+import { ICategory } from "../../types/types";
+import "./categories.scss";
 
-export interface ICategories {
-  items: IFilterOption[],
-  current: IFilterOption,
-  change: (i:number) => void
-}
+export interface ICategories {}
 
-const Categories:FC<ICategories> = ({items, current, change}) => {
+const categories: ICategory[] = [
+  { title: "Усі", option: 0 },
+  { title: "М'ясні", option: 1 },
+  { title: "Гриль", option: 2 },
+  { title: "Гострі", option: 3 },
+  { title: "Вегетаріанські", option: 4 },
+  { title: "Закриті", option: 5 },
+];
+
+const Categories: FC<ICategories> = ({}) => {
+  const { category } = useAppSelector((state) => state.optionsReducer);
+  const { changeCategory } = useActions();
 
   return (
     <div>
-      <ul className='categories'>
-        {items.map((item, i) => {
-            return <li className={items.indexOf(current) === i ? 'active' : ''} onClick={() => {change(i)}} key={i}>{item.title}</li>
+      <ul className="categories">
+        {categories.map((item, i) => {
+          return (
+            <li
+              key={i}
+              className={category === item.option ? "active" : ""}
+              onClick={() => {
+                changeCategory(item.option);
+              }}
+            >
+              {item.title}
+            </li>
+          );
         })}
       </ul>
     </div>
   );
-}
+};
 
 export default Categories;

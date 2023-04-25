@@ -1,8 +1,9 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import pizzasReduser from "./slices/PizzasSlice";
+import {reducer as optionsReducer} from "./slices/OptionsSlice";
 
 const rootReducer = combineReducers({
-  pizzasReduser,
+  pizzasReduser, optionsReducer
 });
 
 export const store = configureStore({
