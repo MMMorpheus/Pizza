@@ -1,7 +1,5 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useEffect } from "react";
 import { Categories, Sort, PizzasList } from "../../components";
-import {  Order } from "../../types/types";
-import { IPizza } from "../../redux/models/IPizza";
 
 import axios from "axios";
 import { useAppDispach, useAppSelector } from "../../hooks/redux";
@@ -16,16 +14,7 @@ const Home: FC = () => {
   const {title} = useAppSelector(state => state.optionsReducer.category)
  
   
-  const [order, setOrder] = useState(Order.asc);
-  const handleOrder = (): void => {
-    if (order === "asc") {
-      setOrder(Order.desc);
-    } else {
-      setOrder(Order.asc);
-    }
-  };
-
-  // function query(i: IFilterOption): string {
+    // function query(i: IFilterOption): string {
   //   let param: string = "category_like";
   //   switch (i.option) {
   //     case 0:

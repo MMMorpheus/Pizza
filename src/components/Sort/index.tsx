@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect, useRef } from "react";
 import { useAppSelector } from "../../hooks/redux";
 import { useActions } from "../../hooks/useActions";
 import { IOption } from "../../types/types";
@@ -13,13 +13,28 @@ const options: IOption[] = [
 ];
 
 const Sort: FC<ISort> = () => {
-  const [isOpened, setIsOpened] = useState(false);
-
   const { sortOption } = useAppSelector((state) => state.optionsReducer);
   const { changeOption, toggleOrder } = useActions();
 
+  const [isOpened, setIsOpened] = useState(false);
+  const popUpRef = useRef(null);
+
+  useEffect(() => {
+    const clickOutside = (event: any): void => {
+      const path = event.composedPath();
+      if (!path.includes(popUpRef.current)) {
+        setIsOpened(false);
+      }
+    };
+
+    document.body.addEventListener("click", clickOutside);
+    return () => {
+      document.body.removeEventListener("click", clickOutside);
+    };
+  }, []);
+
   return (
-    <div className="sort_options">
+    <div ref={popUpRef} className="sort_options">
       <div className={`triangle ${isOpened ? "triangle_active" : ""}`}></div>
       <div>
         Сортування за:
@@ -33,7 +48,9 @@ const Sort: FC<ISort> = () => {
         </span>
         <svg
           className="order"
-          onClick={() => {}}
+          onClick={() => {
+            toggleOrder();
+          }}
           enableBackground="new 0 0 100 100"
           id="Layer_1"
           version="1.1"
