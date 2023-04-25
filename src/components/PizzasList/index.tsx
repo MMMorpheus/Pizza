@@ -1,9 +1,8 @@
 import { FC } from "react";
 import PizzaCard from "../PizzaCard";
-import "./pizzaslist.scss";
 import { Skeleton } from "../../components";
-
 import { IPizza } from "../../redux/models/IPizza";
+import "./pizzaslist.scss";
 
 interface IPizzasList {
   items: IPizza[];
@@ -14,7 +13,7 @@ const PizzasList: FC<IPizzasList> = ({ items, isFetching }) => {
   return (
     <ul className="list">
       {isFetching
-        ? [...Array(8)].map((_, i) => {
+        ? [...Array(4)].map((_, i) => {
             return (
               <li key={i}>
                 <Skeleton />
@@ -25,9 +24,6 @@ const PizzasList: FC<IPizzasList> = ({ items, isFetching }) => {
           items.map((obj) => {
             return <PizzaCard key={obj.id} item={obj} />;
           })}
-      {/* {items.map(obj => {
-            return <PizzaCard key={obj.id} item={obj} />
-        })} */}
     </ul>
   );
 };

@@ -2,23 +2,24 @@ import { FC, useEffect } from "react";
 import { Categories, Sort, PizzasList } from "../../components";
 
 import axios from "axios";
-import { useAppDispach, useAppSelector } from "../../hooks/redux";
-import { fetchPizzas } from "../../redux/slices/ActionsCreator";
-import { useActions } from "../../hooks/useActions";
 axios.defaults.baseURL = "http://localhost:3000";
+
+import {  useAppSelector } from "../../hooks/redux";
+import { useActions } from "../../hooks/useActions";
+
 
 const Home: FC = () => {
   const { fetchPizzas } = useActions();
   const { pizzas, isLoading, error } = useAppSelector(
     (state) => state.pizzasReduser
   );
-  const { category, sortOption, currentPage, order } = useAppSelector(
+  const { category, sortOption, currentPage, order, searchValue } = useAppSelector(
     (state) => state.optionsReducer
   );
 
   useEffect(() => {
-    fetchPizzas({ category, sortOption, currentPage, order });
-  }, [category, sortOption, currentPage, order]);
+    fetchPizzas({ category, sortOption, currentPage, order, searchValue });
+  }, [category, sortOption, currentPage, order, searchValue]);
 
   return (
     <>

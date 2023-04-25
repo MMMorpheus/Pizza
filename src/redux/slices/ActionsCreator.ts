@@ -8,15 +8,16 @@ interface IQueryParams {
   category: ICategory,
   sortOption: IOption,
   currentPage: number,
-  order: string
+  order: string,
+  searchValue: string
 }
 
 export const fetchPizzas = createAsyncThunk(
   "pizzas/getAll",
   async (param:IQueryParams, thunkAPI) => {
-    const {category, sortOption, currentPage, order} = param;
+    const {category, sortOption, currentPage, order, searchValue} = param;
     try {
-      const response = await axios.get<IPizza[]>(`/products?_page=${currentPage}&limit_4&category_like=${category.option === 0 ? '' : category.option}&_sort=${sortOption.query}&_order_${order}`);
+      const response = await axios.get<IPizza[]>(`/products?_page=${currentPage}&_limit=4&title_like=${searchValue}&category_like=${category.option === 0 ? '' : category.option}&_sort=${sortOption.query}&_order=${order}`);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (e) {
       const errorMsg = (e as Error);
@@ -24,6 +25,3 @@ export const fetchPizzas = createAsyncThunk(
     }
   }
 );
-
-
-//<ICategory, IOption, number, string>

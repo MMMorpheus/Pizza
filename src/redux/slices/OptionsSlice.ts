@@ -6,6 +6,7 @@ interface IOptionsState {
   sortOption: IOption;
   currentPage: number;
   order: string;
+  searchValue: string;
 }
 
 const initialState: IOptionsState = {
@@ -13,6 +14,7 @@ const initialState: IOptionsState = {
   sortOption: { title: "рейтингом", query: "rating" },
   currentPage: 1,
   order: "asc",
+  searchValue: "",
 };
 
 const OptionsSlice = createSlice({
@@ -31,6 +33,12 @@ const OptionsSlice = createSlice({
       } else {
         state.order = "asc";
       }
+    },
+    changePage(state, action: PayloadAction<number>) {
+      state.currentPage = action.payload;
+    },
+    setSearchValue(state, action: PayloadAction<string>) {
+      state.searchValue = action.payload;
     },
   },
 });
