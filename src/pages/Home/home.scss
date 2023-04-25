@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    & > h1 {
+        width: 350px;
+    }
+    & > button {
+        cursor: pointer;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        background-color: #f75c1d;
+        font-size: 16px;
+        font-weight: 600;
+        transition: transform 0.3s ease;
+        &:active {
+            transform: translateY(2px);
+        }
+    }
+}

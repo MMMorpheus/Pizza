@@ -1,9 +1,13 @@
-import * as React from "react";
+import { FC } from "react";
+import { useAppSelector } from "../../hooks/redux";
+import { useActions } from "../../hooks/useActions";
 import "./header.scss";
 
 export interface IAppProps {}
 
-export default function Header(props: IAppProps) {
+const Header: FC = () => {
+  const { setSearchValue } = useActions();
+  const { searchValue } = useAppSelector((state) => state.optionsReducer);
   return (
     <header className="header">
       <div className="storeInfo">
@@ -13,15 +17,20 @@ export default function Header(props: IAppProps) {
           <p>Найсмачніша піцца у цілому Всесвіті</p>
         </div>
       </div>
+      <label>
+        <input
+          type="text"
+          placeholder="Пошук за назвою..."
+          value={searchValue}
+          onChange={(e) => {
+            setSearchValue(e.target.value);
+          }}
+        />
+      </label>
       <div className="cartInfo">
         <p>320 &#8372;</p>
         <div>
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 18 18"
-            fill="none"
-          >
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
             <path
               d="M6.33333 16.3333C7.06971 16.3333 7.66667 15.7364 7.66667 15C7.66667 14.2636 7.06971 13.6667 6.33333 13.6667C5.59695 13.6667 5 14.2636 5 15C5 15.7364 5.59695 16.3333 6.33333 16.3333Z"
               stroke="white"
@@ -49,4 +58,6 @@ export default function Header(props: IAppProps) {
       </div>
     </header>
   );
-}
+};
+
+export default Header;

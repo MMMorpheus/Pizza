@@ -7,6 +7,7 @@ interface IOptionsState {
   currentPage: number;
   order: string;
   searchValue: string;
+  haveChanged: boolean;
 }
 
 const initialState: IOptionsState = {
@@ -15,6 +16,7 @@ const initialState: IOptionsState = {
   currentPage: 1,
   order: "asc",
   searchValue: "",
+  haveChanged: false
 };
 
 const OptionsSlice = createSlice({
@@ -23,11 +25,20 @@ const OptionsSlice = createSlice({
   reducers: {
     changeCategory(state, action: PayloadAction<ICategory>) {
       state.category = action.payload;
+      if(!state.haveChanged) {
+        state.haveChanged = true;
+      }
     },
     changeOption(state, action: PayloadAction<IOption>) {
       state.sortOption = action.payload;
+      if(!state.haveChanged) {
+        state.haveChanged = true;
+      }
     },
     toggleOrder(state) {
+      if(!state.haveChanged) {
+        state.haveChanged = true;
+      }
       if (state.order === "asc") {
         state.order = "desc";
       } else {
@@ -36,9 +47,23 @@ const OptionsSlice = createSlice({
     },
     changePage(state, action: PayloadAction<number>) {
       state.currentPage = action.payload;
+      if(!state.haveChanged) {
+        state.haveChanged = true;
+      }
     },
     setSearchValue(state, action: PayloadAction<string>) {
-      state.searchValue = action.payload;
+      state.searchValue = action.payload.toLowerCase();
+      if(!state.haveChanged) {
+        state.haveChanged = true;
+      }
+    },
+    setDefaultOptions(state) {
+      state.category = { title: "Усі", option: 0 };
+      state.sortOption = { title: "рейтингом", query: "rating" };
+      state.order = "asc";
+      state.searchValue = "";
+      state.currentPage = 1;
+      state.haveChanged = false;
     },
   },
 });

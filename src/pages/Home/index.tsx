@@ -4,18 +4,18 @@ import { Categories, Sort, PizzasList } from "../../components";
 import axios from "axios";
 axios.defaults.baseURL = "http://localhost:3000";
 
-import {  useAppSelector } from "../../hooks/redux";
+import { useAppSelector } from "../../hooks/redux";
 import { useActions } from "../../hooks/useActions";
 
+import "./home.scss"
 
 const Home: FC = () => {
-  const { fetchPizzas } = useActions();
+  const { fetchPizzas, setDefaultOptions } = useActions();
   const { pizzas, isLoading, error } = useAppSelector(
     (state) => state.pizzasReduser
   );
-  const { category, sortOption, currentPage, order, searchValue } = useAppSelector(
-    (state) => state.optionsReducer
-  );
+  const { category, sortOption, currentPage, order, searchValue, haveChanged } =
+    useAppSelector((state) => state.optionsReducer);
 
   useEffect(() => {
     fetchPizzas({ category, sortOption, currentPage, order, searchValue });
@@ -28,7 +28,10 @@ const Home: FC = () => {
         <Sort />
       </div>
       <section className="list_container">
-        <h1>{category.title}</h1>
+        <div className="container">
+          <h1>{category.title} піци</h1>
+          {haveChanged && <button onClick={() => {setDefaultOptions()}}>Скинути усі фільтри</button>}
+        </div>
         <PizzasList items={pizzas} isFetching={isLoading} />
       </section>
     </>
