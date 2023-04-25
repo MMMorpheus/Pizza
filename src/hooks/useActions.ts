@@ -3,9 +3,10 @@ import { useMemo } from "react";
 import { useAppDispach } from "./redux";
 
 import {actions as optionActions} from "../redux/slices/OptionsSlice"
+import { fetchPizzas } from "../redux/slices/ActionsCreator";
 
 const rootActions = {
-    ...optionActions
+    ...optionActions, fetchPizzas
 }
 
 export const useActions = () => {

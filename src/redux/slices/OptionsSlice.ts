@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ICategories } from "../../components/Categories";
 import { ICategory, IOption } from "../../types/types";
 
 interface IOptionsState {
