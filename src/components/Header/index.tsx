@@ -35,7 +35,7 @@ const Header: FC = () => {
               placeholder="Пошук за назвою..."
               value={searchValue}
               debounceTimeout={500}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              onChange={(e: React.ChangeEvent<HTMLInputElement>):void => {
                 setSearchValue(e.target.value);
               }}
             />
@@ -46,7 +46,7 @@ const Header: FC = () => {
                 viewBox="0 0 200 200"
                 width="20"
                 fill="currentColor"
-                onClick={() => {
+                onClick={(e: React.MouseEvent<SVGSVGElement>):void => {
                   setSearchValue("");
                 }}
               >

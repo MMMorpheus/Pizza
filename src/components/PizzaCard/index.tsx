@@ -33,7 +33,7 @@ const PizzaCard: FC<IPizzaCardProps> = ({
               <li
                 key={type}
                 className={activeType === type ? "_active" : ""}
-                onClick={() => {
+                onClick={(e: React.MouseEvent<HTMLLIElement>):void => {
                   handleType(type);
                 }}
               >
@@ -48,7 +48,7 @@ const PizzaCard: FC<IPizzaCardProps> = ({
               <li
                 key={size}
                 className={activeSize === i ? "_active" : ""}
-                onClick={() => {
+                onClick={(e: React.MouseEvent<HTMLLIElement>):void => {
                   handleSize(i);
                 }}
               >
@@ -61,7 +61,7 @@ const PizzaCard: FC<IPizzaCardProps> = ({
       <div className="price">
         <p>від {price} &#8372;</p>
         <button
-          onClick={() => {
+          onClick={(e: React.MouseEvent<HTMLButtonElement>):void => {
             addToCart({
               id,
               imageUrl,

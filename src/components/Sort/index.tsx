@@ -4,7 +4,6 @@ import { useActions } from "../../hooks/useActions";
 import { Option } from "../../types/types";
 import "./sort.scss";
 
-
 const options: Option[] = [
   { title: "рейтингом", query: "rating" },
   { title: "ціною", query: "price" },
@@ -19,9 +18,9 @@ const Sort: FC = () => {
   const popUpRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const clickOutside = (event: any): void => {
+    const clickOutside = (event: MouseEvent): void => {
       const path = event.composedPath();
-      if (!path.includes(popUpRef.current)) {
+      if (popUpRef.current && !path.includes(popUpRef.current)) {
         setIsOpened(false);
       }
     };

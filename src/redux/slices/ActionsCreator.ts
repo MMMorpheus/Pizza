@@ -2,13 +2,13 @@ import { IPizza } from "../models/IPizza";
 
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { ICategory, IOption } from "../../types/types";
+import { Category, Option } from "../../types/types";
 
 // import {parseLinkHeader} from 'parse-link-header'
 
 interface IQueryParams {
-  category: ICategory,
-  sortOption: IOption,
+  category: Category,
+  sortOption: Option,
   currentPage: number,
   order: string,
   searchValue: string

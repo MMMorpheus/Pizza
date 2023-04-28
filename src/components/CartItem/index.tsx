@@ -10,14 +10,7 @@ export interface ICartItem {
 
 const CartItem: FC<ICartItem> = ({ pizza }) => {
   const { addOne, removeOne, removeFromCart } = useActions();
-  const {
-    imageUrl,
-    title,
-    type,
-    size,
-    amount,
-    priceByAmount,
-  } = pizza;
+  const { imageUrl, title, type, size, amount, priceByAmount } = pizza;
 
   return (
     <li className="cartItem">
@@ -32,7 +25,7 @@ const CartItem: FC<ICartItem> = ({ pizza }) => {
         <div className="amount">
           <button
             className="btn"
-            onClick={() => {
+            onClick={(e: React.MouseEvent<HTMLButtonElement>): void => {
               removeOne(pizza);
             }}
           >
@@ -41,7 +34,7 @@ const CartItem: FC<ICartItem> = ({ pizza }) => {
           <div>{amount}</div>
           <button
             className="btn"
-            onClick={() => {
+            onClick={(e: React.MouseEvent<HTMLButtonElement>):void => {
               addOne(pizza);
             }}
           >
@@ -51,7 +44,7 @@ const CartItem: FC<ICartItem> = ({ pizza }) => {
         <p className="total">{priceByAmount} &#8372;</p>
         <button
           className="btn btn-grey"
-          onClick={() => {
+          onClick={(e: React.MouseEvent<HTMLButtonElement>):void => {
             removeFromCart(pizza);
           }}
         >

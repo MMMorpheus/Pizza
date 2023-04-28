@@ -25,7 +25,7 @@ const Categories: FC = () => {
             <li
               key={i}
               className={category.option === item.option ? "active" : ""}
-              onClick={() => {
+              onClick={(e: React.MouseEvent<HTMLLIElement>):void => {
                 changeCategory(item);
               }}
             >

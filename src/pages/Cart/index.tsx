@@ -40,7 +40,7 @@ const Cart: FC = () => {
             </svg>
             <h2>Кошик</h2>
           </div>
-          <div onClick={() => {resetCart()}}>
+          <div onClick={(e: React.MouseEvent<HTMLDivElement>):void => {resetCart()}}>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path
                 d="M2.5 5H4.16667H17.5"
@@ -81,7 +81,7 @@ const Cart: FC = () => {
           <p className="cart_price">Сума замовлення: <span>{totalPrice} &#8372;</span></p>
         </div>
         <div className="cart_actions">
-          <button className="cart_btn">{'<'} Повернутись назад</button>
+          <button className="cart_btn"> Повернутись назад</button>
           <button className="cart_btn cart_btn_orange">Сплатити зараз</button>
         </div>
       </section>
