@@ -9,6 +9,7 @@
     & > .storeInfo {
         margin-left: 30px;
         display: flex;
+
         & > div {
             margin-left: 17px;
             h2 {
@@ -35,8 +36,10 @@
             cursor: pointer;
         }
         & > .searchIcon {
-            top: 8px;
-            left: 5px;
+            top: 14px;
+            left: 10px;
+            width: 22px;
+            height: 22px;
         }
         & > .resetIcon {
             top: 15px;
@@ -64,7 +67,8 @@
         background-color: #fe5f1e;
         position: relative;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-evenly;
+        gap: 25px;
         align-items: center;
         &::after {
             content: "";

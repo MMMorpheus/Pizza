@@ -1,0 +1,8 @@
+global goals: 
+1. Realize backend myself;
+    1.1 Create DB with search option, that will give back response by category, filtering by name, sorting by price/rating/alphabet;
+    1.2 Realize correct pagination, that will send a response with total amount of available pages by request with options;
+
+local goals:
+1. Realize users authorization;
+2. Realize admin panel with different metrics;

@@ -4,9 +4,10 @@ import { useAppDispach } from "./redux";
 
 import {actions as optionActions} from "../redux/slices/OptionsSlice"
 import { fetchPizzas } from "../redux/slices/ActionsCreator";
+import {actions as cartActions} from "../redux/slices/CartSlice";
 
 const rootActions = {
-    ...optionActions, fetchPizzas
+    ...optionActions, ...cartActions, fetchPizzas
 }
 
 export const useActions = () => {

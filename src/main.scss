@@ -55,6 +55,11 @@ img {
   display: block;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 /* Наследуем шрифты для инпутов и кнопок */
 input,
 button,
