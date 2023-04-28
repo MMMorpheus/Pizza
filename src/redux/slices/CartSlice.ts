@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 import { ICartPizza } from "../models/ICartPizza";
 import { ICurrentPizza } from "../models/IPizza";
@@ -37,8 +37,10 @@ export const CartSlice = createSlice({
             i.size === action.payload.size &&
             i.type === action.payload.type
         );
-        pizza.amount += 1;
-        pizza.priceByAmount = pizza.amount * pizza.price;
+        if (pizza) {
+          pizza.amount += 1;
+          pizza.priceByAmount = pizza.amount * pizza.price;
+        }
       } else {
         state.cartPizzas.push({
           ...action.payload,
@@ -49,9 +51,11 @@ export const CartSlice = createSlice({
       }
     },
     removeFromCart(state, action: PayloadAction<ICartPizza>) {
-      state.cartPizzas = state.cartPizzas.filter(i => i.cartId !== action.payload.cartId)
+      state.cartPizzas = state.cartPizzas.filter(
+        (i) => i.cartId !== action.payload.cartId
+      );
       state.totalAmount -= action.payload.amount;
-      state.totalPrice -=action.payload.priceByAmount;
+      state.totalPrice -= action.payload.priceByAmount;
     },
     resetCart(state) {
       state.totalAmount = 0;
@@ -65,9 +69,11 @@ export const CartSlice = createSlice({
           i.size === action.payload.size &&
           i.type === action.payload.type
       );
+      if (pizza) {
+        pizza.amount++;
+        pizza.priceByAmount += action.payload.price;
+      }
 
-      pizza.amount++;
-      pizza.priceByAmount += action.payload.price;
       state.totalPrice += action.payload.price;
       state.totalAmount++;
     },
@@ -78,13 +84,13 @@ export const CartSlice = createSlice({
           i.size === action.payload.size &&
           i.type === action.payload.type
       );
-      if (pizza.amount > 1) {
+      if (pizza && pizza.amount > 1) {
         pizza.amount--;
         pizza.priceByAmount -= action.payload.price;
         state.totalPrice -= action.payload.price;
         state.totalAmount--;
       } else {
-        CartSlice.caseReducers.removeFromCart(state, action)
+        CartSlice.caseReducers.removeFromCart(state, action);
       }
     },
   },
