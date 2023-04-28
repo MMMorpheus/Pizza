@@ -2,11 +2,9 @@ import { FC } from "react";
 import { useAppSelector } from "../../hooks/redux";
 import { useActions } from "../../hooks/useActions";
 import { Link, useLocation } from "react-router-dom";
-import "./header.scss";
-
 import { DebounceInput } from "react-debounce-input";
 
-export interface IAppProps {}
+import "./header.scss";
 
 const Header: FC = () => {
   const { setSearchValue } = useActions();

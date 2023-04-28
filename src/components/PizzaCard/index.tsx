@@ -1,23 +1,24 @@
 import { FC, useState } from "react";
 import { DoughtType } from "../../types/types";
 import { IPizza } from "../../redux/models/IPizza";
-import "./pizzacard.scss";
 import { useActions } from "../../hooks/useActions";
 
-interface PizzaCardProps {
+import "./pizzacard.scss";
+
+interface IPizzaCardProps {
   item: IPizza;
 }
 
-const PizzaCard: FC<PizzaCardProps> = ({
+const PizzaCard: FC<IPizzaCardProps> = ({
   item: { id, imageUrl, title, price, types, sizes },
 }) => {
   const { addToCart } = useActions();
 
-  const [activeType, setActiveType] = useState(types[0]);
+  const [activeType, setActiveType] = useState<number>(types[0]);
   const handleType = (index: number): void => {
     setActiveType(index);
   };
-  const [activeSize, setActiveSize] = useState(0);
+  const [activeSize, setActiveSize] = useState<number>(0);
   const handleSize = (index: number): void => {
     setActiveSize(index);
   };

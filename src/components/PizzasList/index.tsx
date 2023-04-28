@@ -1,15 +1,16 @@
 import { FC } from "react";
 import PizzaCard from "../PizzaCard";
-import { Skeleton } from "../../components";
 import { IPizza } from "../../redux/models/IPizza";
+import { Skeleton } from "../../components";
+
 import "./pizzaslist.scss";
 
-interface IPizzasList {
+interface IPizzasListProps {
   items: IPizza[];
   isFetching: boolean;
 }
 
-const PizzasList: FC<IPizzasList> = ({ items, isFetching }) => {
+const PizzasList: FC<IPizzasListProps> = ({ items, isFetching }) => {
   return (
     <ul className="list">
       {isFetching

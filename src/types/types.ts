@@ -4,12 +4,12 @@ export enum DoughtType {
   традиційне,
 }
 
-export interface ICategory {
+export type Category = {
   title: string;
   option: number;
 }
 
-export interface IOption {
+export type Option = {
   title: string,
   query: string
 }

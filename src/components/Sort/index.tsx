@@ -1,23 +1,22 @@
 import { FC, useState, useEffect, useRef } from "react";
 import { useAppSelector } from "../../hooks/redux";
 import { useActions } from "../../hooks/useActions";
-import { IOption } from "../../types/types";
+import { Option } from "../../types/types";
 import "./sort.scss";
 
-interface ISort {}
 
-const options: IOption[] = [
+const options: Option[] = [
   { title: "рейтингом", query: "rating" },
   { title: "ціною", query: "price" },
   { title: "алфавітом", query: "title" },
 ];
 
-const Sort: FC<ISort> = () => {
+const Sort: FC = () => {
   const { sortOption } = useAppSelector((state) => state.optionsReducer);
   const { changeOption, toggleOrder } = useActions();
 
-  const [isOpened, setIsOpened] = useState(false);
-  const popUpRef = useRef(null);
+  const [isOpened, setIsOpened] = useState<boolean>(false);
+  const popUpRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const clickOutside = (event: any): void => {

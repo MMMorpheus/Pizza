@@ -1,12 +1,10 @@
 import { FC } from "react";
 import { useAppSelector } from "../../hooks/redux";
 import { useActions } from "../../hooks/useActions";
-import { ICategory } from "../../types/types";
+import { Category } from "../../types/types";
 import "./categories.scss";
 
-export interface ICategories {}
-
-const categories: ICategory[] = [
+const categories: Category[] = [
   { title: "Усі", option: 0 },
   { title: "М'ясні", option: 1 },
   { title: "Гриль", option: 2 },
@@ -15,7 +13,7 @@ const categories: ICategory[] = [
   { title: "Закриті", option: 5 },
 ];
 
-const Categories: FC<ICategories> = ({}) => {
+const Categories: FC = () => {
   const { category } = useAppSelector((state) => state.optionsReducer);
   const { changeCategory } = useActions();
 

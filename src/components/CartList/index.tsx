@@ -5,7 +5,6 @@ import { CartItem } from "../";
 
 import "./cartList.scss";
 
-export interface ICartListProps {}
 
 const CartList: FC = () => {
   const { cartPizzas } = useAppSelector((state) => state.cartReducer);

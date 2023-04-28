@@ -11,7 +11,7 @@ import "./home.scss"
 
 const Home: FC = () => {
   const { fetchPizzas, setDefaultOptions } = useActions();
-  const { pizzas, isLoading, error } = useAppSelector(
+  const { pizzas, isLoading } = useAppSelector(
     (state) => state.pizzasReduser
   );
   const { category, sortOption, currentPage, order, searchValue, haveChanged } =
