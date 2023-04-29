@@ -1,24 +1,25 @@
 import { FC, useEffect } from "react";
 import { Categories, Sort, PizzasList } from "../../components";
 
-
-import { useAppSelector } from "../../hooks/redux";
 import { useActions } from "../../hooks/useActions";
+import { useAppSelector } from "../../hooks/redux";
+import { optionsSelector } from "../../redux/options/selectors";
+import { pizzasSelector } from "../../redux/pizzas/selectors";
 
-import "./home.scss"
+import "./home.scss";
 
 const Home: FC = () => {
   const { fetchPizzas, setDefaultOptions } = useActions();
-  const { pizzas, isLoading } = useAppSelector(
-    (state) => state.pizzasReduser
-  );
-  const { category, sortOption, currentPage, order, searchValue, haveChanged } =
-    useAppSelector((state) => state.optionsReducer);
+  const { pizzas, isLoading } = useAppSelector(pizzasSelector);
+  const { ...params } = useAppSelector(optionsSelector);
+
+  const {category, sortOption, currentPage, order, searchValue, haveChanged} = params;
 
   useEffect(() => {
-    fetchPizzas({ category, sortOption, currentPage, order, searchValue });
-  }, [category, sortOption, currentPage, order, searchValue]);
+    fetchPizzas(params);
+  }, [category, sortOption, currentPage, order, searchValue, haveChanged]);
 
+  
   return (
     <>
       <div className="options_container">
@@ -28,7 +29,15 @@ const Home: FC = () => {
       <section className="list_container">
         <div className="container">
           <h1>{category.title} піци</h1>
-          {haveChanged && <button onClick={() => {setDefaultOptions()}}>Скинути усі фільтри</button>}
+          {haveChanged && (
+            <button
+              onClick={() => {
+                setDefaultOptions();
+              }}
+            >
+              Скинути усі фільтри
+            </button>
+          )}
         </div>
         <PizzasList items={pizzas} isFetching={isLoading} />
       </section>

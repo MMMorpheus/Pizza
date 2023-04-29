@@ -8,6 +8,8 @@ const initialState: ICartState = {
   cartPizzas: [],
 };
 
+
+
 const CartSlice = createSlice({
   name: "cart",
   initialState,
@@ -55,27 +57,16 @@ const CartSlice = createSlice({
       state.cartPizzas = [];
     },
     addOne(state, action: PayloadAction<ICartPizza>) {
-      const pizza = state.cartPizzas.find(
-        (i) =>
-          i.title === action.payload.title &&
-          i.size === action.payload.size &&
-          i.type === action.payload.type
-      );
+      const pizza = findItem(state, action);
       if (pizza) {
         pizza.amount++;
         pizza.priceByAmount += action.payload.price;
       }
-
       state.totalPrice += action.payload.price;
       state.totalAmount++;
     },
     removeOne(state, action: PayloadAction<ICartPizza>) {
-      const pizza = state.cartPizzas.find(
-        (i) =>
-          i.title === action.payload.title &&
-          i.size === action.payload.size &&
-          i.type === action.payload.type
-      );
+      const pizza = findItem(state, action);
       if (pizza && pizza.amount > 1) {
         pizza.amount--;
         pizza.priceByAmount -= action.payload.price;
@@ -87,5 +78,14 @@ const CartSlice = createSlice({
     },
   },
 });
+
+function findItem (state: ICartState, action: PayloadAction<ICartPizza>) {
+  return state.cartPizzas.find(
+    (i) =>
+      i.title === action.payload.title &&
+      i.size === action.payload.size &&
+      i.type === action.payload.type
+  );
+};
 
 export const { actions, reducer } = CartSlice;
