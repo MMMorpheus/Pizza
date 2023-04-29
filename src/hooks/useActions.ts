@@ -1,10 +1,11 @@
 import { bindActionCreators } from "@reduxjs/toolkit";
-import { useMemo } from "react";
 import { useAppDispach } from "./redux";
+import { useMemo } from "react";
 
-import {actions as optionActions} from "../redux/slices/OptionsSlice"
-import { fetchPizzas } from "../redux/slices/ActionsCreator";
-import {actions as cartActions} from "../redux/slices/CartSlice";
+
+import { fetchPizzas } from "../redux/pizzas/actionsCreator";
+import {actions as optionActions} from "../redux/options/slice"
+import {actions as cartActions} from "../redux/cart/slice";
 
 const rootActions = {
     ...optionActions, ...cartActions, fetchPizzas

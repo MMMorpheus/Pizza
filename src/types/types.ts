@@ -4,12 +4,3 @@ export enum DoughtType {
   традиційне,
 }
 
-export type Category = {
-  title: string;
-  option: number;
-}
-
-export type Option = {
-  title: string,
-  query: string
-}

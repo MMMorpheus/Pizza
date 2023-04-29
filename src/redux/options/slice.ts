@@ -1,14 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ICategory, IOption } from "../../types/types";
-
-interface IOptionsState {
-  category: ICategory;
-  sortOption: IOption;
-  currentPage: number;
-  order: string;
-  searchValue: string;
-  haveChanged: boolean;
-}
+import { IOptionsState, Category, Option } from "./types";
 
 const initialState: IOptionsState = {
   category: { title: "Усі", option: 0 },
@@ -23,13 +14,13 @@ const OptionsSlice = createSlice({
   name: "options",
   initialState,
   reducers: {
-    changeCategory(state, action: PayloadAction<ICategory>) {
+    changeCategory(state, action: PayloadAction<Category>) {
       state.category = action.payload;
       if(!state.haveChanged) {
         state.haveChanged = true;
       }
     },
-    changeOption(state, action: PayloadAction<IOption>) {
+    changeOption(state, action: PayloadAction<Option>) {
       state.sortOption = action.payload;
       if(!state.haveChanged) {
         state.haveChanged = true;

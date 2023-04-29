@@ -1,18 +1,8 @@
-import { IPizza } from "../models/IPizza";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { IQueryParams, IPizza } from "./types";
 
 import axios from "axios";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { Category, Option } from "../../types/types";
-
-// import {parseLinkHeader} from 'parse-link-header'
-
-interface IQueryParams {
-  category: Category,
-  sortOption: Option,
-  currentPage: number,
-  order: string,
-  searchValue: string
-}
+axios.defaults.baseURL = "http://localhost:3000";
 
 export const fetchPizzas = createAsyncThunk(
   "pizzas/getAll",

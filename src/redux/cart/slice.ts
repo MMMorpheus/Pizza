@@ -1,14 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ICartState, ICartPizza, ICurrentPizza } from "./types";
 import { v4 as uuidv4 } from "uuid";
-
-import { ICartPizza } from "../models/ICartPizza";
-import { ICurrentPizza } from "../models/IPizza";
-
-interface ICartState {
-  totalAmount: number;
-  totalPrice: number;
-  cartPizzas: ICartPizza[];
-}
 
 const initialState: ICartState = {
   totalAmount: 0,
@@ -16,7 +8,7 @@ const initialState: ICartState = {
   cartPizzas: [],
 };
 
-export const CartSlice = createSlice({
+const CartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
