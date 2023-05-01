@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useActions } from "../../hooks/useActions";
-import { ICartPizza } from "../../redux/models/ICartPizza";
+import { ICartPizza } from "../../redux/cart/types";
 
 import "./cartItem.scss";
 
@@ -8,7 +8,7 @@ export interface ICartItem {
   pizza: ICartPizza;
 }
 
-const CartItem: FC<ICartItem> = ({ pizza }) => {
+export const CartItem: FC<ICartItem> = ({ pizza }) => {
   const { addOne, removeOne, removeFromCart } = useActions();
   const { imageUrl, title, type, size, amount, priceByAmount } = pizza;
 
@@ -54,5 +54,3 @@ const CartItem: FC<ICartItem> = ({ pizza }) => {
     </li>
   );
 };
-
-export default CartItem;

@@ -6,7 +6,7 @@ import { DebounceInput } from "react-debounce-input";
 
 import "./header.scss";
 
-const Header: FC = () => {
+export const Header: FC = () => {
   const { setSearchValue } = useActions();
   const { searchValue } = useAppSelector((state) => state.optionsReducer);
   const { totalAmount, totalPrice } = useAppSelector(
@@ -18,7 +18,7 @@ const Header: FC = () => {
   return (
     <header className="header">
       <Link to="/" className="storeInfo">
-        <img src="/logo.svg" alt="Logo" />
+        <img src="/logo.svg" alt="Logo" className={location.pathname === "/cart" ? 'rotation' : ''}/>
         <div>
           <h2>React Pizza</h2>
           <p>Найсмачніша піцца у цілому Всесвіті</p>
@@ -88,5 +88,3 @@ const Header: FC = () => {
     </header>
   );
 };
-
-export default Header;

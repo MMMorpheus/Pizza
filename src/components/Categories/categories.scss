@@ -13,6 +13,9 @@
         letter-spacing: 0.015em;
         text-align: center;
         transition: background-color 0.5s ease;
+        &:hover{
+            background-color: #e7e7e7;
+        }
     }
 }
 .active {

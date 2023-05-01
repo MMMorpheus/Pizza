@@ -1,6 +1,6 @@
 import { FC } from "react";
-import PizzaCard from "../PizzaCard";
-import { IPizza } from "../../redux/models/IPizza";
+import {PizzaCard} from "../PizzaCard";
+import { IPizza } from "../../redux/pizzas/types";
 import { Skeleton } from "../../components";
 
 import "./pizzaslist.scss";
@@ -10,7 +10,7 @@ interface IPizzasListProps {
   isFetching: boolean;
 }
 
-const PizzasList: FC<IPizzasListProps> = ({ items, isFetching }) => {
+export const PizzasList: FC<IPizzasListProps> = ({ items, isFetching }) => {
   return (
     <ul className="list">
       {isFetching
@@ -28,5 +28,3 @@ const PizzasList: FC<IPizzasListProps> = ({ items, isFetching }) => {
     </ul>
   );
 };
-
-export default PizzasList;

@@ -28,7 +28,10 @@ dl,
 dd {
   margin: 0;
 }
-
+html {
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
+}
 /* Выставляем основные настройки по-умолчанию для body */
 body {
   min-height: 100vh;

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useAppSelector } from "../../hooks/redux";
 import { useActions } from "../../hooks/useActions";
-import { Category } from "../../types/types";
+import { Category } from "../../redux/options/types";
 import "./categories.scss";
 
 const categories: Category[] = [
@@ -13,7 +13,7 @@ const categories: Category[] = [
   { title: "Закриті", option: 5 },
 ];
 
-const Categories: FC = () => {
+export const Categories: FC = () => {
   const { category } = useAppSelector((state) => state.optionsReducer);
   const { changeCategory } = useActions();
 
@@ -37,5 +37,3 @@ const Categories: FC = () => {
     </div>
   );
 };
-
-export default Categories;

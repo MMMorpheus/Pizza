@@ -1,8 +1,9 @@
-export { default as Header } from "./Header";
-export { default as Sort } from "./Sort";
-export { default as Categories } from "./Categories";
-export { default as PizzaCard } from "./PizzaCard";
-export { default as Skeleton } from "./Skeleton";
-export { default as PizzasList } from "./PizzasList";
-export { default as CartItem } from "./CartItem";
-export { default as CartList } from "./CartList";
+export * from "./Header";
+export * from "./Sort";
+export * from "./Categories";
+export * from "./PizzaCard";
+export * from "./Skeleton";
+export * from "./PizzasList";
+export * from "./CartItem";
+export * from "./CartList";
+export * from "./EmptyCart";

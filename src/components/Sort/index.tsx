@@ -1,7 +1,7 @@
 import { FC, useState, useEffect, useRef } from "react";
 import { useAppSelector } from "../../hooks/redux";
 import { useActions } from "../../hooks/useActions";
-import { Option } from "../../types/types";
+import { Option } from "../../redux/options/types";
 import "./sort.scss";
 
 const options: Option[] = [
@@ -10,7 +10,7 @@ const options: Option[] = [
   { title: "алфавітом", query: "title" },
 ];
 
-const Sort: FC = () => {
+export const Sort: FC = () => {
   const { sortOption } = useAppSelector((state) => state.optionsReducer);
   const { changeOption, toggleOrder } = useActions();
 
@@ -87,5 +87,3 @@ const Sort: FC = () => {
     </div>
   );
 };
-
-export default Sort;

@@ -1,27 +1,32 @@
 import { FC, useState } from "react";
 import { DoughtType } from "../../types/types";
-import { IPizza } from "../../redux/models/IPizza";
+import { IPizza } from "../../redux/pizzas/types";
 import { useActions } from "../../hooks/useActions";
+import { useAppSelector } from "../../hooks/redux";
+import { cartSelector } from "../../redux/cart/selectors";
 
 import "./pizzacard.scss";
+
 
 interface IPizzaCardProps {
   item: IPizza;
 }
 
-const PizzaCard: FC<IPizzaCardProps> = ({
+export const PizzaCard: FC<IPizzaCardProps> = ({
   item: { id, imageUrl, title, price, types, sizes },
 }) => {
   const { addToCart } = useActions();
+  const { cartPizzas } = useAppSelector(cartSelector);
+
+  const amount = cartPizzas
+    .filter((i) => i.title === title)
+    .reduce<number>((acum: number, curr) => {
+      return acum + curr.amount;
+    }, 0);
 
   const [activeType, setActiveType] = useState<number>(types[0]);
-  const handleType = (index: number): void => {
-    setActiveType(index);
-  };
   const [activeSize, setActiveSize] = useState<number>(0);
-  const handleSize = (index: number): void => {
-    setActiveSize(index);
-  };
+  
   return (
     <li className="card">
       <img src={imageUrl} />
@@ -33,8 +38,8 @@ const PizzaCard: FC<IPizzaCardProps> = ({
               <li
                 key={type}
                 className={activeType === type ? "_active" : ""}
-                onClick={(e: React.MouseEvent<HTMLLIElement>):void => {
-                  handleType(type);
+                onClick={(e: React.MouseEvent<HTMLLIElement>): void => {
+                  setActiveType(type);
                 }}
               >
                 {DoughtType[type]}
@@ -48,8 +53,8 @@ const PizzaCard: FC<IPizzaCardProps> = ({
               <li
                 key={size}
                 className={activeSize === i ? "_active" : ""}
-                onClick={(e: React.MouseEvent<HTMLLIElement>):void => {
-                  handleSize(i);
+                onClick={(e: React.MouseEvent<HTMLLIElement>): void => {
+                  setActiveSize(i);
                 }}
               >
                 {size} см.
@@ -61,7 +66,7 @@ const PizzaCard: FC<IPizzaCardProps> = ({
       <div className="price">
         <p>від {price} &#8372;</p>
         <button
-          onClick={(e: React.MouseEvent<HTMLButtonElement>):void => {
+          onClick={(): void => {
             addToCart({
               id,
               imageUrl,
@@ -73,10 +78,9 @@ const PizzaCard: FC<IPizzaCardProps> = ({
           }}
         >
           + Додати
+          {amount > 0 && <span>{amount}</span>}
         </button>
       </div>
     </li>
   );
 };
-
-export default PizzaCard;

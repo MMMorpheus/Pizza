@@ -1,20 +1,19 @@
 import { FC } from "react";
-import { useAppSelector } from "../../hooks/redux";
-
-import { CartItem } from "../";
+import { ICartPizza } from "../../redux/cart/types";
+import { CartItem } from "../CartItem";
 
 import "./cartList.scss";
 
+interface ICartPizzasProps {
+  items: ICartPizza[]
+}
 
-const CartList: FC = () => {
-  const { cartPizzas } = useAppSelector((state) => state.cartReducer);
+export const CartList: FC<ICartPizzasProps> = ({items}) => {
   return (
     <ul>
-      {cartPizzas.map((item) => {
+      {items.map((item) => {
         return <CartItem key={item.cartId} pizza={item}/>;
       })}
     </ul>
   );
 };
-
-export default CartList;
