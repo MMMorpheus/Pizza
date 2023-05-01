@@ -1,4 +1,4 @@
-import { FC, useRef, useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useAppSelector } from "../../hooks/redux";
 import { optionsSelector } from "../../redux/options/selectors";
 import { cartSelector } from "../../redux/cart/selectors";
@@ -8,20 +8,15 @@ import { DebounceInput } from "react-debounce-input";
 
 import "./header.scss";
 
-
 export const Header: FC = () => {
   const { setSearchValue } = useActions();
   const { searchValue } = useAppSelector(optionsSelector);
-  const {  cartPizzas, totalAmount, totalPrice } = useAppSelector(cartSelector);
+  const { cartPizzas, totalAmount, totalPrice } = useAppSelector(cartSelector);
 
   const location = useLocation();
-  const isMounted = useRef<boolean>(false);
   useEffect(() => {
-    if(isMounted.current) {
-      const json = JSON.stringify(cartPizzas)
-      window.localStorage.setItem('cart', json)
-    }
-    isMounted.current = true;
+    const json = JSON.stringify(cartPizzas);
+    window.localStorage.setItem("cart", json);
   }, [cartPizzas]);
 
   return (

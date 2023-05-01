@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../hooks/redux";
 import { cartSelector } from "../../redux/cart/selectors";
@@ -8,19 +8,25 @@ import { CartList, EmptyCart } from "../../components";
 
 import "./cart.scss";
 
-
 const Cart: FC = () => {
   const { resetCart } = useActions();
   const { totalAmount, totalPrice, cartPizzas } = useAppSelector(cartSelector);
 
-  const resetCarthandler = (e: React.MouseEvent<HTMLDivElement>): void => {
-    window.confirm("Ви дійсно хочете очистити кошик?") && resetCart();
-  };
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <>
       {cartPizzas.length ? (
         <section className="cart_section">
+          <div className={ isOpen ? "confiramtion_popUp confiramtion_popUp_open" : 'confiramtion_popUp'}>
+            <div>
+              <p>Ви дійсно бажаєте очистити кошик?</p>
+              <div>
+                <button onClick={(e:React.MouseEvent<HTMLButtonElement>) => {resetCart()}}>Так!</button>
+                <button onClick={(e: React.MouseEvent<HTMLButtonElement>) => {setIsOpen(false)}}>Повернутись</button>
+              </div>
+            </div>
+          </div>
           <div className="cart_header">
             <div>
               <svg width="31" height="31" viewBox="0 0 31 31" fill="none">
@@ -48,7 +54,7 @@ const Cart: FC = () => {
               </svg>
               <h2>Кошик</h2>
             </div>
-            <div onClick={resetCarthandler}>
+            <div onClick={() => {setIsOpen(true)}}>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path
                   d="M2.5 5H4.16667H17.5"

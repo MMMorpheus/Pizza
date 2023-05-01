@@ -25,7 +25,7 @@ export const CartItem: FC<ICartItem> = ({ pizza }) => {
         <div className="amount">
           <button
           disabled={amount === 1 ? true : false}
-            className="btn"
+            className="btn btn-orange"
             onClick={(e: React.MouseEvent<HTMLButtonElement>): void => {
               removeOne(pizza);
             }}
@@ -34,7 +34,7 @@ export const CartItem: FC<ICartItem> = ({ pizza }) => {
           </button>
           <div>{amount}</div>
           <button
-            className="btn"
+            className="btn btn-orange"
             onClick={(e: React.MouseEvent<HTMLButtonElement>):void => {
               addOne(pizza);
             }}

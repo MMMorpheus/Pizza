@@ -51,10 +51,13 @@
         outline: none;
         cursor: pointer;
         background-color: #fff;
-        color: #fe5f1e;
-        border: 2px solid #fe5f1e;
         font-size: 18px;
         font-weight: 800;
+        border: 2px solid transparent;
+    }
+    .btn-orange {
+        color: #fe5f1e;
+        border-color: #fe5f1e;
         transition: all 0.3s ease;
         &:disabled {
             border-color: #8d8d8d;
@@ -78,5 +81,9 @@
     .btn-grey {
         border-color: #d7d7d7;
         color: #d7d7d7;
+        transition: transform 0.3s ease;
+        &:active {
+            transform: translateY(2px);
+        }
     }
 }
