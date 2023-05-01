@@ -1,17 +1,17 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../hooks/redux";
+import { cartSelector } from "../../redux/cart/selectors";
 import { useActions } from "../../hooks/useActions";
 
 import { CartList, EmptyCart } from "../../components";
 
 import "./cart.scss";
 
+
 const Cart: FC = () => {
   const { resetCart } = useActions();
-  const { totalAmount, totalPrice, cartPizzas } = useAppSelector(
-    (state) => state.cartReducer
-  );
+  const { totalAmount, totalPrice, cartPizzas } = useAppSelector(cartSelector);
 
   const resetCarthandler = (e: React.MouseEvent<HTMLDivElement>): void => {
     window.confirm("Ви дійсно хочете очистити кошик?") && resetCart();

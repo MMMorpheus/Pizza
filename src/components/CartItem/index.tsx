@@ -24,6 +24,7 @@ export const CartItem: FC<ICartItem> = ({ pizza }) => {
       <div className="space-beteween">
         <div className="amount">
           <button
+          disabled={amount === 1 ? true : false}
             className="btn"
             onClick={(e: React.MouseEvent<HTMLButtonElement>): void => {
               removeOne(pizza);

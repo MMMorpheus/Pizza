@@ -1,14 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ICartState, ICartPizza, ICurrentPizza } from "./types";
 import { v4 as uuidv4 } from "uuid";
+import { getCartDataFromLS } from "../../utils/getCartDataFromLS";
+
+const { items, price, count } = getCartDataFromLS();
 
 const initialState: ICartState = {
-  totalAmount: 0,
-  totalPrice: 0,
-  cartPizzas: [],
+  totalAmount: count,
+  totalPrice: price,
+  cartPizzas: items,
 };
-
-
 
 const CartSlice = createSlice({
   name: "cart",
@@ -79,13 +80,13 @@ const CartSlice = createSlice({
   },
 });
 
-function findItem (state: ICartState, action: PayloadAction<ICartPizza>) {
+function findItem(state: ICartState, action: PayloadAction<ICartPizza>) {
   return state.cartPizzas.find(
     (i) =>
       i.title === action.payload.title &&
       i.size === action.payload.size &&
       i.type === action.payload.type
   );
-};
+}
 
 export const { actions, reducer } = CartSlice;

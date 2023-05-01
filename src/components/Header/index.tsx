@@ -1,24 +1,37 @@
-import { FC } from "react";
+import { FC, useRef, useEffect } from "react";
 import { useAppSelector } from "../../hooks/redux";
+import { optionsSelector } from "../../redux/options/selectors";
+import { cartSelector } from "../../redux/cart/selectors";
 import { useActions } from "../../hooks/useActions";
 import { Link, useLocation } from "react-router-dom";
 import { DebounceInput } from "react-debounce-input";
 
 import "./header.scss";
 
+
 export const Header: FC = () => {
   const { setSearchValue } = useActions();
-  const { searchValue } = useAppSelector((state) => state.optionsReducer);
-  const { totalAmount, totalPrice } = useAppSelector(
-    (state) => state.cartReducer
-  );
+  const { searchValue } = useAppSelector(optionsSelector);
+  const {  cartPizzas, totalAmount, totalPrice } = useAppSelector(cartSelector);
 
   const location = useLocation();
+  const isMounted = useRef<boolean>(false);
+  useEffect(() => {
+    if(isMounted.current) {
+      const json = JSON.stringify(cartPizzas)
+      window.localStorage.setItem('cart', json)
+    }
+    isMounted.current = true;
+  }, [cartPizzas]);
 
   return (
     <header className="header">
       <Link to="/" className="storeInfo">
-        <img src="/logo.svg" alt="Logo" className={location.pathname === "/cart" ? 'rotation' : ''}/>
+        <img
+          src="/logo.svg"
+          alt="Logo"
+          className={location.pathname === "/cart" ? "rotation" : ""}
+        />
         <div>
           <h2>React Pizza</h2>
           <p>Найсмачніша піцца у цілому Всесвіті</p>
@@ -35,7 +48,7 @@ export const Header: FC = () => {
               placeholder="Пошук за назвою..."
               value={searchValue}
               debounceTimeout={500}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>):void => {
+              onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
                 setSearchValue(e.target.value);
               }}
             />
@@ -46,7 +59,7 @@ export const Header: FC = () => {
                 viewBox="0 0 200 200"
                 width="20"
                 fill="currentColor"
-                onClick={(e: React.MouseEvent<SVGSVGElement>):void => {
+                onClick={(e: React.MouseEvent<SVGSVGElement>): void => {
                   setSearchValue("");
                 }}
               >
