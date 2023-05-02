@@ -23,7 +23,7 @@ export const Header: FC = () => {
     <header className="header">
       <Link to="/" className="storeInfo">
         <img
-          src="/logo.svg"
+          src="./logo.svg"
           alt="Logo"
           className={location.pathname === "/cart" ? "rotation" : ""}
         />
