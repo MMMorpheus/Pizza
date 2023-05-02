@@ -17,7 +17,7 @@ const Home: FC = () => {
 
   useEffect(() => {
     fetchPizzas(params);
-  }, [category, sortOption, currentPage, order, searchValue, haveChanged]);
+  }, [category, sortOption, currentPage, order]);
 
   
   return (
@@ -39,7 +39,7 @@ const Home: FC = () => {
             </button>
           )}
         </div>
-        <PizzasList items={pizzas} isFetching={isLoading} />
+        <PizzasList items={pizzas} isFetching={isLoading} filterValue={searchValue}/>
       </section>
     </>
   );

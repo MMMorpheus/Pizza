@@ -20,7 +20,7 @@ export interface IPizzasState {
 export interface IQueryParams {
   category: Category;
   sortOption: Option;
-  currentPage: number;
-  order: string;
-  searchValue: string;
+  currentPage?: number;
+  order?: string;
+  searchValue?: string;
 }

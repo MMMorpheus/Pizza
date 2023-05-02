@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { Home, Cart } from "./pages";
+import { Home, Cart, ErrorPage } from "./pages";
 import "./main.scss";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -8,6 +8,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Home /> },
       {

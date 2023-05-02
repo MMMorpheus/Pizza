@@ -1,0 +1,9 @@
+.error_page {
+    margin-top: 25%;
+    & p {
+        font-size: 18px;
+    }
+    & a {
+        text-decoration: underline !important;
+    }
+}

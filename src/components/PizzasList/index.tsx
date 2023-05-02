@@ -8,9 +8,10 @@ import "./pizzaslist.scss";
 interface IPizzasListProps {
   items: IPizza[];
   isFetching: boolean;
+  filterValue: string;
 }
 
-export const PizzasList: FC<IPizzasListProps> = ({ items, isFetching }) => {
+export const PizzasList: FC<IPizzasListProps> = ({ items, isFetching, filterValue }) => {
   return (
     <ul className="list">
       {isFetching
@@ -22,7 +23,11 @@ export const PizzasList: FC<IPizzasListProps> = ({ items, isFetching }) => {
             );
           })
         : items &&
-          items.map((obj) => {
+          items
+          .filter((item) =>
+              item.title.toLowerCase().includes(filterValue)
+            )
+          .map((obj) => {
             return <PizzaCard key={obj.id} item={obj} />;
           })}
     </ul>
