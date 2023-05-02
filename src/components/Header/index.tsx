@@ -21,18 +21,18 @@ export const Header: FC = () => {
 
   return (
     <header className="header">
-      <Link to="/store/main" className="storeInfo">
+      <Link to="Pizza/main" className="storeInfo">
         <img
           src="./logo.svg"
           alt="Logo"
-          className={location.pathname === "/cart" ? "rotation" : ""}
+          className={location.pathname === "Pizza/cart" ? "rotation" : ""}
         />
         <div>
           <h2>React Pizza</h2>
           <p>Найсмачніша піцца у цілому Всесвіті</p>
         </div>
       </Link>
-      {location.pathname !== "/store/cart" && (
+      {location.pathname !== "/cart" && (
         <>
           <label>
             <svg className="searchIcon" fill="currentColor" viewBox="0 0 32 32">
@@ -62,7 +62,7 @@ export const Header: FC = () => {
               </svg>
             )}
           </label>
-          <Link to="store/cart" className="cartInfo">
+          <Link to="Pizza/cart" className="cartInfo">
             <p>{totalPrice} &#8372;</p>
             <div>
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
