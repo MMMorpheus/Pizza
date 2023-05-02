@@ -14,11 +14,11 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       {
-        path: "/Pizza",
+        path: "/",
         element: <Home />,
       },
       {
-        path: "/Pizza/cart",
+        path: "/cart",
         element: (
           <Suspense fallback={<>Завантаження кошику...</>}>
             <Cart />
