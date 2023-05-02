@@ -8,7 +8,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
-    path: "/Pizza",
+    path: "/",
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
