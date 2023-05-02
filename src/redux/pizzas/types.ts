@@ -24,3 +24,4 @@ export interface IQueryParams {
   order?: string;
   searchValue?: string;
 }
+

@@ -44,9 +44,6 @@ const OptionsSlice = createSlice({
     },
     setSearchValue(state, action: PayloadAction<string>) {
       state.searchValue = action.payload.toLowerCase();
-      // if(!state.haveChanged && state.searchValue ) {
-      //   state.haveChanged = true;
-      // }
     },
     setDefaultOptions(state) {
       state.category = { title: "Усі", option: 0 };
@@ -56,6 +53,13 @@ const OptionsSlice = createSlice({
       state.currentPage = 1;
       state.haveChanged = false;
     },
+    setFilters(state, action: PayloadAction<any>) {
+      state.category = action.payload.category;
+      state.sortOption = action.payload.sortOption;
+      state.order = action.payload.order;
+      // state.currentPage = 1;
+      state.haveChanged = true;
+    }
   },
 });
 

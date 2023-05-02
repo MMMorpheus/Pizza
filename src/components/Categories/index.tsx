@@ -4,7 +4,7 @@ import { useActions } from "../../hooks/useActions";
 import { Category } from "../../redux/options/types";
 import "./categories.scss";
 
-const categories: Category[] = [
+export const categories: Category[] = [
   { title: "Усі", option: 0 },
   { title: "М'ясні", option: 1 },
   { title: "Гриль", option: 2 },

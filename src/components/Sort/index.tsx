@@ -4,7 +4,7 @@ import { useActions } from "../../hooks/useActions";
 import { Option } from "../../redux/options/types";
 import "./sort.scss";
 
-const options: Option[] = [
+export const options: Option[] = [
   { title: "рейтингом", query: "rating" },
   { title: "ціною", query: "price" },
   { title: "алфавітом", query: "title" },
