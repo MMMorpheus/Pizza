@@ -14,6 +14,7 @@ export const Header: FC = () => {
   const { cartPizzas, totalAmount, totalPrice } = useAppSelector(cartSelector);
 
   const location = useLocation();
+  console.log(location)
   useEffect(() => {
     const json = JSON.stringify(cartPizzas);
     window.localStorage.setItem("cart", json);
@@ -21,18 +22,18 @@ export const Header: FC = () => {
 
   return (
     <header className="header">
-      <Link to="Pizza/" className="storeInfo">
+      <Link to="/Pizza/" className="storeInfo">
         <img
           src="./logo.svg"
           alt="Logo"
-          className={location.pathname === "Pizza/Pizza/cart" ? "rotation" : ""}
+          className={location.pathname === "/Pizza/cart" ? "rotation" : ""}
         />
         <div>
           <h2>React Pizza</h2>
           <p>Найсмачніша піцца у цілому Всесвіті</p>
         </div>
       </Link>
-      {location.pathname !== "Pizza/Pizza/cart" && (
+      {location.pathname !== "/Pizza/cart" && (
         <>
           <label>
             <svg className="searchIcon" fill="currentColor" viewBox="0 0 32 32">
@@ -62,7 +63,7 @@ export const Header: FC = () => {
               </svg>
             )}
           </label>
-          <Link to="Pizza/cart" className="cartInfo">
+          <Link to="/Pizza/cart" className="cartInfo">
             <p>{totalPrice} &#8372;</p>
             <div>
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
