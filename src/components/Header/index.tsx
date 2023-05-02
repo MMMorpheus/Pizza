@@ -21,18 +21,18 @@ export const Header: FC = () => {
 
   return (
     <header className="header">
-      <Link to="Pizza/main" className="storeInfo">
+      <Link to="Pizza/" className="storeInfo">
         <img
           src="./logo.svg"
           alt="Logo"
-          className={location.pathname === "Pizza/cart" ? "rotation" : ""}
+          className={location.pathname === "Pizza/Pizza/cart" ? "rotation" : ""}
         />
         <div>
           <h2>React Pizza</h2>
           <p>Найсмачніша піцца у цілому Всесвіті</p>
         </div>
       </Link>
-      {location.pathname !== "Pizza/cart" && (
+      {location.pathname !== "Pizza/Pizza/cart" && (
         <>
           <label>
             <svg className="searchIcon" fill="currentColor" viewBox="0 0 32 32">
