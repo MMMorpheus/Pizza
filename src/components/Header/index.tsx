@@ -32,7 +32,7 @@ export const Header: FC = () => {
           <p>Найсмачніша піцца у цілому Всесвіті</p>
         </div>
       </Link>
-      {location.pathname !== "/cart" && (
+      {location.pathname !== "Pizza/cart" && (
         <>
           <label>
             <svg className="searchIcon" fill="currentColor" viewBox="0 0 32 32">
