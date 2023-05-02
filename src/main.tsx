@@ -1,6 +1,8 @@
 import ReactDOM from "react-dom/client";
+import { Suspense, lazy } from "react";
 import App from "./App";
-import { Home, Cart, ErrorPage } from "./pages";
+import { Home, ErrorPage } from "./pages";
+const Cart = lazy(() => import("./pages/Cart"));
 import "./main.scss";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -17,7 +19,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <Cart />,
+        element: (
+          <Suspense fallback={<>Завантаження кошику...</>}>
+            <Cart />
+          </Suspense>
+        ),
       },
     ],
   },

@@ -58,15 +58,15 @@ const Home: FC = () => {
         order: serialized.order,
       };
       setFilters(optionsData)
+      isSeacrched.current = true;
     }
-    isSeacrched.current = true;
+    
   }, []);
 
+  // Проверяем, если приложение первый раз смонитровалось, но параметры поиска не меняли - запрашиваем пиццы. Если уже смонтировалось - делаем всего 1 запрос вместо двух.
   useEffect(() => {
-    if(!isMounted.current && isSeacrched) {
-      fetchPizzas(params)
-    };
-    if(!isSeacrched.current && isMounted) {
+    
+    if(!isSeacrched.current) {
       fetchPizzas(params)
     }
     isSeacrched.current = false;
