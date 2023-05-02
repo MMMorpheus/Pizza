@@ -19,7 +19,7 @@ const ErrorPage: FC = () => {
         <h1>Здається, щось пішло не так! &#128575;</h1>
         <p>Статус код: {error.status}</p>
         <p>Повідолення: {error.statusText}</p>
-        <p>Спробуйте пізніше або <Link to='/'>поверніться на головну</Link>!</p>
+        <p>Спробуйте пізніше або <Link to='/store/main'>поверніться на головну</Link>!</p>
 
         {error.data?.message && (
           <p>

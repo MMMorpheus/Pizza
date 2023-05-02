@@ -8,17 +8,17 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/store",
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Home /> },
       {
-        path: "/main",
+        path: "/store/main",
         element: <Home />,
       },
       {
-        path: "/cart",
+        path: "/store/cart",
         element: (
           <Suspense fallback={<>Завантаження кошику...</>}>
             <Cart />
