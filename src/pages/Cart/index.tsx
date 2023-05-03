@@ -99,7 +99,7 @@ const Cart: FC = () => {
             </p>
           </div>
           <div className="cart_actions">
-            <Link to="/" className="cart_btn">
+            <Link to="/Pizza/" className="cart_btn">
               {"<"} Повернутись назад
             </Link>
             <button className="cart_btn cart_btn_orange">Сплатити зараз</button>
