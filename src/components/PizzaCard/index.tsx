@@ -6,7 +6,6 @@ import { useActions, useAmount } from "../../hooks";
 import styles from "./pizzacard.module.scss";
 import clsx from "clsx";
 
-
 interface IPizzaCardProps {
   item: IPizza;
 }

@@ -31,19 +31,18 @@ dd {
 html {
   overflow-x: hidden;
   margin-right: calc(-1 * (100vw - 100%));
+  font-family: Nunito, sans-serif;
+  text-rendering: optimizeSpeed;
 }
 /* Выставляем основные настройки по-умолчанию для body */
 body {
-  min-height: 100vh;
-  scroll-behavior: smooth;
-  font-family: Nunito, sans-serif;
-  text-rendering: optimizeSpeed;
+  min-height: 100vh;  
   line-height: 1.5;
   background: #FFDF8C;
   padding-block: 45px;
-  display: flex;
-  justify-content: center;
-  overflow: auto;
+  // display: flex;
+  // justify-content: center;
+  // overflow: auto;
 }
 
 /* Удаляем стандартную стилизацию для всех ul и il*/

@@ -1,9 +1,8 @@
 import { FC } from "react";
-import {PizzaCard} from "../PizzaCard";
+import { Skeleton, PizzaCard } from "../../components";
 import { IPizza } from "../../redux/pizzas/types";
-import { Skeleton } from "../../components";
 
-import "./pizzaslist.scss";
+import styles from "./pizzaslist.module.scss";
 
 interface IPizzasListProps {
   items: IPizza[];
@@ -12,8 +11,10 @@ interface IPizzasListProps {
 }
 
 export const PizzasList: FC<IPizzasListProps> = ({ items, isFetching, filterValue }) => {
+
+
   return (
-    <ul className="list">
+    <ul className={styles.list}>
       {isFetching
         ? [...Array(4)].map((_, i) => {
             return (
