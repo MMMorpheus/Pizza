@@ -1,11 +1,10 @@
 import { FC, useState } from "react";
 import { DoughtType } from "../../types/types";
 import { IPizza } from "../../redux/pizzas/types";
-import { useActions } from "../../hooks/useActions";
-import { useAppSelector } from "../../hooks/redux";
-import { cartSelector } from "../../redux/cart/selectors";
+import { useActions, useAmount } from "../../hooks";
 
-import "./pizzacard.scss";
+import styles from "./pizzacard.module.scss";
+import clsx from "clsx";
 
 
 interface IPizzaCardProps {
@@ -15,29 +14,23 @@ interface IPizzaCardProps {
 export const PizzaCard: FC<IPizzaCardProps> = ({
   item: { id, imageUrl, title, price, types, sizes },
 }) => {
-  const { addToCart } = useActions();
-  const { cartPizzas } = useAppSelector(cartSelector);
-
-  const amount = cartPizzas
-    .filter((i) => i.title === title)
-    .reduce<number>((acum: number, curr) => {
-      return acum + curr.amount;
-    }, 0);
-
   const [activeType, setActiveType] = useState<number>(types[0]);
   const [activeSize, setActiveSize] = useState<number>(0);
   
+  const { addToCart } = useActions();
+  const amount = useAmount(title);
+  
   return (
-    <li className="card">
+    <li className={styles.card}>
       <img src={imageUrl} />
       <p>{title}</p>
-      <div className="options">
+      <div className={styles.options}>
         <ul>
           {types.map((type) => {
             return (
               <li
                 key={type}
-                className={activeType === type ? "_active" : ""}
+                className={clsx(activeType === type && styles.active)}
                 onClick={(e: React.MouseEvent<HTMLLIElement>): void => {
                   setActiveType(type);
                 }}
@@ -52,7 +45,7 @@ export const PizzaCard: FC<IPizzaCardProps> = ({
             return (
               <li
                 key={size}
-                className={activeSize === i ? "_active" : ""}
+                className={clsx(activeSize === i && styles.active)}
                 onClick={(e: React.MouseEvent<HTMLLIElement>): void => {
                   setActiveSize(i);
                 }}
@@ -63,7 +56,7 @@ export const PizzaCard: FC<IPizzaCardProps> = ({
           })}
         </ul>
       </div>
-      <div className="price">
+      <div className={styles.price}>
         <p>від {price} &#8372;</p>
         <button
           onClick={(): void => {
