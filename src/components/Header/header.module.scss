@@ -1,16 +1,17 @@
 .header {
-    height: 137px;
     width: 100%;
-    padding-inline: 40px;
+    height: 137px;
     border-bottom: 1px solid #f6f6f6;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    & > .storeInfo {
-        margin-left: 30px;
+    .storeInfo {
         display: flex;
-        & > img {
+        .logo {
             transition: transform 0.3s ease-in-out;
+            &._rotation {
+                transform: rotate(180deg);
+            }
         }
 
         & > div {
@@ -21,13 +22,24 @@
                 line-height: 29px;
                 letter-spacing: 0.01em;
                 text-transform: uppercase;
+                @media screen and (max-width: 1050px) {
+                    font-size: 20px;
+                }
+                @media screen and (max-width: 576px) {
+                    display: none;
+                }
             }
             p {
-                font-size: 16px;
                 font-weight: 400;
                 line-height: 19px;
                 text-align: left;
                 color: #7b7b7b;
+                @media screen and (max-width: 1050px) {
+                    font-size: 14px;
+                }
+                @media screen and (max-width: 576px) {
+                    display: none;
+                }
             }
         }
     }
@@ -38,18 +50,17 @@
             position: absolute;
             cursor: pointer;
         }
-        & > .searchIcon {
+        .searchIcon {
             top: 14px;
-            left: 10px;
+            left: 5%;
             width: 22px;
             height: 22px;
         }
-        & > .resetIcon {
+        .resetIcon {
             top: 15px;
-            right: 115px;
+            right: 5%;
         }
         & > input {
-            margin-right: 100px;
             width: 350px;
             height: 50px;
             border: 1px solid #f3f3f3;
@@ -61,9 +72,11 @@
                 font-size: 16px;
             }
         }
+        @media screen and (max-width: 1050px) {
+            display: none;
+        }
     }
-    & > .cartInfo {
-        min-width: 150px;
+    .cartInfo {
         height: 50px;
         padding: 15px 20px;
         border-radius: 30px;
@@ -97,8 +110,4 @@
             transform: translateY(-1px);
         }
     }
-}
-
-.rotation {
-    transform: rotate(180deg);
 }

@@ -7,11 +7,11 @@ import {
   options,
 } from "../../components";
 
-import { useActions } from "../../hooks/useActions";
-import { useAppSelector } from "../../hooks/redux";
+import { useActions, useAppSelector } from "../../hooks";
 import { optionsSelector } from "../../redux/options/selectors";
 import { pizzasSelector } from "../../redux/pizzas/selectors";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useMediaPredicate } from "react-media-hook";
 import qs from "qs";
 
 import "./home.scss";
@@ -26,6 +26,8 @@ const Home: FC = () => {
   const navigate = useNavigate();
 
   const { category, sortOption, currentPage, order, searchValue, haveChanged } = params;
+
+  const biggerThen768:boolean = useMediaPredicate('(min-width: 768px)');
 
   // Проверяем, если был первый рендер, значит при изменении критериев поиска нужно вшить их в адрессную строку
   useEffect(() => {
@@ -81,13 +83,23 @@ const Home: FC = () => {
       <section className="list_container">
         <div className="container">
           <h1>{category.title} піци</h1>
-          {haveChanged && (
+          {haveChanged && biggerThen768 && (
             <button
               onClick={() => {
                 setDefaultOptions();
               }}
             >
               Скинути усі фільтри
+            </button>
+          )}
+          {haveChanged && !biggerThen768 && (
+            <button
+            title="reset filters"
+              onClick={() => {
+                setDefaultOptions();
+              }}
+            >
+              X
             </button>
           )}
         </div>

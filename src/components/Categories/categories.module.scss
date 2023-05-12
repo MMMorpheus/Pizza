@@ -1,0 +1,41 @@
+.categories {
+    flex: 1;
+    .categories_list {
+        display: flex;
+        gap: 10px;
+        .li-category {
+            padding: 14px 25px;
+            border-radius: 30px;
+            background: #f9f9f9;
+            color: #2c2c2c;
+            cursor: pointer;
+            font-weight: 700;
+            line-height: 19px;
+            letter-spacing: 0.015em;
+            transition: background-color 0.5s ease;
+            &:hover {
+                background-color: #e7e7e7;
+            }
+
+            &._active {
+                background: #282828;
+                color: white;
+            }
+            @media screen and (max-width: 1050px) {
+                padding: 10px 21px;
+                font-size: 14px;
+            }
+        }
+        @media screen and (max-width: 1050px) {
+            justify-content: space-between;
+        }
+    }
+    @media screen and (max-width: 768px) {
+        width: 437px;
+        overflow-x: scroll;
+    }
+    @media screen and (max-width: 576px) {
+        width: 260px;
+        overflow-x: scroll;
+    }
+}

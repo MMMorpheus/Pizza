@@ -1,12 +1,12 @@
 import { FC, useEffect } from "react";
-import { useAppSelector } from "../../hooks/redux";
+import { useAppSelector, useActions } from "../../hooks";
 import { optionsSelector } from "../../redux/options/selectors";
 import { cartSelector } from "../../redux/cart/selectors";
-import { useActions } from "../../hooks/useActions";
 import { Link, useLocation } from "react-router-dom";
 import { DebounceInput } from "react-debounce-input";
 
-import "./header.scss";
+import clsx from 'clsx'
+import styles from "./header.module.scss";
 
 export const Header: FC = () => {
   const { setSearchValue } = useActions();
@@ -21,12 +21,12 @@ export const Header: FC = () => {
   }, [cartPizzas]);
 
   return (
-    <header className="header">
-      <Link to="/Pizza/" className="storeInfo">
+    <header className={styles.header}>
+      <Link to="/Pizza/" className={styles.storeInfo}>
         <img
           src="./logo.svg"
           alt="Logo"
-          className={location.pathname === "/Pizza/cart" ? "rotation" : ""}
+          className={clsx(styles.logo, location.pathname === "/Pizza/cart" && styles['_rotation'])}
         />
         <div>
           <h2>React Pizza</h2>
@@ -36,7 +36,7 @@ export const Header: FC = () => {
       {location.pathname !== "/Pizza/cart" && (
         <>
           <label>
-            <svg className="searchIcon" fill="currentColor" viewBox="0 0 32 32">
+            <svg className={styles.searchIcon} fill="currentColor" viewBox="0 0 32 32">
               <path d="M29.71,28.29l-6.5-6.5-.07,0a12,12,0,1,0-1.39,1.39s0,.05,0,.07l6.5,6.5a1,1,0,0,0,1.42,0A1,1,0,0,0,29.71,28.29ZM14,24A10,10,0,1,1,24,14,10,10,0,0,1,14,24Z" />
             </svg>
             <DebounceInput
@@ -50,10 +50,9 @@ export const Header: FC = () => {
             />
             {searchValue && (
               <svg
-                className="resetIcon"
-                height="20"
-                viewBox="0 0 200 200"
+                className={styles.resetIcon}
                 width="20"
+                viewBox="0 0 200 200"
                 fill="currentColor"
                 onClick={(e: React.MouseEvent<SVGSVGElement>): void => {
                   setSearchValue("");
@@ -63,7 +62,7 @@ export const Header: FC = () => {
               </svg>
             )}
           </label>
-          <Link to="/Pizza/cart" className="cartInfo">
+          <Link to="/Pizza/cart" className={styles.cartInfo}>
             <p>{totalPrice} &#8372;</p>
             <div>
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none">

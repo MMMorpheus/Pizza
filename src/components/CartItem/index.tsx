@@ -14,17 +14,19 @@ export const CartItem: FC<ICartItem> = ({ pizza }) => {
 
   return (
     <li className="cartItem">
-      <img src={imageUrl} />
-      <div className="info">
-        <p>{title}</p>
-        <p>
-          {type} тісто, {size} см.
-        </p>
+      <div className="description">
+        <img src={imageUrl} />
+        <div className="info">
+          <p>{title}</p>
+          <p>
+            {type} тісто, {size} см.
+          </p>
+        </div>
       </div>
-      <div className="space-beteween">
-        <div className="amount">
+      <div className="controls">
+        <div className="amount__section">
           <button
-          disabled={amount === 1 ? true : false}
+            disabled={amount === 1 ? true : false}
             className="btn btn-orange"
             onClick={(e: React.MouseEvent<HTMLButtonElement>): void => {
               removeOne(pizza);
@@ -35,22 +37,24 @@ export const CartItem: FC<ICartItem> = ({ pizza }) => {
           <div>{amount}</div>
           <button
             className="btn btn-orange"
-            onClick={(e: React.MouseEvent<HTMLButtonElement>):void => {
+            onClick={(e: React.MouseEvent<HTMLButtonElement>): void => {
               addOne(pizza);
             }}
           >
             +
           </button>
         </div>
-        <p className="total">{priceByAmount} &#8372;</p>
-        <button
-          className="btn btn-grey"
-          onClick={(e: React.MouseEvent<HTMLButtonElement>):void => {
-            removeFromCart(pizza);
-          }}
-        >
-          x
-        </button>
+        <div className="total__section">
+          <p className="total">{priceByAmount} &#8372;</p>
+          <button
+            className="btn btn-grey"
+            onClick={(e: React.MouseEvent<HTMLButtonElement>): void => {
+              removeFromCart(pizza);
+            }}
+          >
+            x
+          </button>
+        </div>
       </div>
     </li>
   );

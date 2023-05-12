@@ -10,7 +10,7 @@ interface ICartPizzasProps {
 
 export const CartList: FC<ICartPizzasProps> = ({items}) => {
   return (
-    <ul>
+    <ul className="cart_list">
       {items.map((item) => {
         return <CartItem key={item.cartId} pizza={item}/>;
       })}

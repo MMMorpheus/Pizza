@@ -1,37 +1,50 @@
 .options_container {
     margin-top: 40px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    row-gap: 20px;
+    @media screen and (max-width: 768px) {
+        display: block;
+        & > div:last-child {
+            margin-top: 10px;
+        }
+    }
+    
 }
 .list_container {
-    h1 {
+    & > h1 {
         margin: 30px 0 35px 0;
         font-size: 32px;
         font-weight: 700;
         line-height: 39px;
         letter-spacing: 0.01em;
     }
-}
-.container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    & > h1 {
-        width: 350px;
-    }
-    & > button {
-        cursor: pointer;
-        padding: 5px 10px;
-        border: none;
-        border-radius: 10px;
-        color: white;
-        background-color: #f75c1d;
-        font-size: 16px;
-        font-weight: 600;
-        transition: transform 0.3s ease;
-        &:active {
-            transform: translateY(2px);
+    .container {
+        margin-block: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        & > h1 {
+            width: 350px;
+        }
+        & > button {
+            cursor: pointer;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            background-color: #f75c1d;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+            &:active {
+                transform: translateY(2px);
+            }
+            @media screen and (min-width: 768px) and (max-width: 1050px) {
+                padding: 3px 7px;
+                font-size: 14px;
+            }
         }
     }
 }

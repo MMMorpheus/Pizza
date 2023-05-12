@@ -1,6 +1,4 @@
 .empty_cart {
-    margin: 0 auto;
-    width: 820px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -11,6 +9,15 @@
         font-weight: 700;
         line-height: 39px;
         letter-spacing: 0.01em;
+        text-align: center;
+        @media screen and (max-width: 768px) {
+            font-size: 28px;
+        }
+        & > span {
+            @media screen and (max-width: 576px) {
+                display: none;
+            }
+        }
     }
     & > p {
         margin-top: 15px;
@@ -21,6 +28,9 @@
         color: #777777;
         text-align: center;
         max-width: 500px;
+        @media screen and (max-width: 768px) {
+            font-size: 16px;
+        }
     }
     & > img {
         margin-top: 30px;

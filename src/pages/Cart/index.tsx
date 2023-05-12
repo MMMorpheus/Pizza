@@ -18,7 +18,7 @@ const Cart: FC = () => {
     <>
       {cartPizzas.length ? (
         <section className="cart_section">
-          <div className={ isOpen ? "confiramtion_popUp confiramtion_popUp_open" : 'confiramtion_popUp'}>
+          {/* <div className={ isOpen ? "confiramtion_popUp confiramtion_popUp_open" : 'confiramtion_popUp'}>
             <div>
               <p>Ви дійсно бажаєте очистити кошик?</p>
               <div>
@@ -26,7 +26,7 @@ const Cart: FC = () => {
                 <button onClick={(e: React.MouseEvent<HTMLButtonElement>) => {setIsOpen(false)}}>Повернутись</button>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="cart_header">
             <div>
               <svg width="31" height="31" viewBox="0 0 31 31" fill="none">
@@ -91,11 +91,11 @@ const Cart: FC = () => {
 
           <CartList items={cartPizzas} />
           <div className="cart_info">
-            <p className="amount">
+            <p>
               Усього піц: <span>{totalAmount} шт.</span>
             </p>
-            <p className="cart_price">
-              Сума замовлення: <span>{totalPrice} &#8372;</span>
+            <p>
+              Сума замовлення: <span className="-orange">{totalPrice} &#8372;</span>
             </p>
           </div>
           <div className="cart_actions">
