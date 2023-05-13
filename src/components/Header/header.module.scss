@@ -25,9 +25,9 @@
                 @media screen and (max-width: 1050px) {
                     font-size: 20px;
                 }
-                @media screen and (max-width: 576px) {
-                    display: none;
-                }
+                // @media screen and (max-width: 576px) {
+                //     display: none;
+                // }
             }
             p {
                 font-weight: 400;
@@ -37,9 +37,9 @@
                 @media screen and (max-width: 1050px) {
                     font-size: 14px;
                 }
-                @media screen and (max-width: 576px) {
-                    display: none;
-                }
+                // @media screen and (max-width: 576px) {
+                //     display: none;
+                // }
             }
         }
     }
@@ -74,40 +74,6 @@
         }
         @media screen and (max-width: 1050px) {
             display: none;
-        }
-    }
-    .cartInfo {
-        height: 50px;
-        padding: 15px 20px;
-        border-radius: 30px;
-        background-color: #fe5f1e;
-        position: relative;
-        display: flex;
-        justify-content: space-evenly;
-        gap: 25px;
-        align-items: center;
-        &::after {
-            content: "";
-            width: 1px;
-            height: 25px;
-            background: rgba(255, 255, 255, 0.25);
-            position: absolute;
-            z-index: 1;
-            top: 25%;
-            left: 50%;
-        }
-        & p {
-            font-size: 16px;
-            font-weight: 700;
-            line-height: 19px;
-            color: #fff;
-        }
-        & > div {
-            display: flex;
-            gap: 8px;
-        }
-        & > div > svg {
-            transform: translateY(-1px);
         }
     }
 }

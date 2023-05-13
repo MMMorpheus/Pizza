@@ -5,6 +5,7 @@ import {
   PizzasList,
   categories,
   options,
+  CartNotification,
 } from "../../components";
 
 import { useActions, useAppSelector } from "../../hooks";
@@ -28,6 +29,7 @@ const Home: FC = () => {
   const { category, sortOption, currentPage, order, searchValue, haveChanged } = params;
 
   const biggerThen768:boolean = useMediaPredicate('(min-width: 768px)');
+  const mobile:boolean = useMediaPredicate('(max-width: 576px)');
 
   // Проверяем, если был первый рендер, значит при изменении критериев поиска нужно вшить их в адрессную строку
   useEffect(() => {
@@ -108,7 +110,9 @@ const Home: FC = () => {
           isFetching={isLoading}
           filterValue={searchValue}
         />
+        <CartNotification isMobile={mobile} />
       </section>
+      
     </>
   );
 };
