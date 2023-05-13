@@ -7,3 +7,4 @@ export * from "./PizzasList";
 export * from "./CartItem";
 export * from "./CartList";
 export * from "./EmptyCart";
+export * from "./Modal";

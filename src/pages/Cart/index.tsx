@@ -1,10 +1,9 @@
 import { FC, useState } from "react";
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../hooks/redux";
+import { useAppSelector, useActions } from "../../hooks";
 import { cartSelector } from "../../redux/cart/selectors";
-import { useActions } from "../../hooks/useActions";
 
-import { CartList, EmptyCart } from "../../components";
+import { CartList, EmptyCart, Modal } from "../../components";
 
 import "./cart.scss";
 
@@ -18,15 +17,30 @@ const Cart: FC = () => {
     <>
       {cartPizzas.length ? (
         <section className="cart_section">
-          {/* <div className={ isOpen ? "confiramtion_popUp confiramtion_popUp_open" : 'confiramtion_popUp'}>
-            <div>
-              <p>Ви дійсно бажаєте очистити кошик?</p>
-              <div>
-                <button onClick={(e:React.MouseEvent<HTMLButtonElement>) => {resetCart()}}>Так!</button>
-                <button onClick={(e: React.MouseEvent<HTMLButtonElement>) => {setIsOpen(false)}}>Повернутись</button>
-              </div>
+          <Modal
+            open={isOpen}
+            onClose={() => {
+              setIsOpen(false);
+            }}
+          >
+            <p className="modal_mes">Ви дійсно бажаєте очистити кошик?</p>
+            <div className="modal_btn">
+              <button
+                onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                  resetCart();
+                }}
+              >
+                Так!
+              </button>
+              <button
+                onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                  setIsOpen(false);
+                }}
+              >
+                Повернутись
+              </button>
             </div>
-          </div> */}
+          </Modal>
           <div className="cart_header">
             <div>
               <svg width="31" height="31" viewBox="0 0 31 31" fill="none">
@@ -54,7 +68,11 @@ const Cart: FC = () => {
               </svg>
               <h2>Кошик</h2>
             </div>
-            <div onClick={() => {setIsOpen(true)}}>
+            <div
+              onClick={() => {
+                setIsOpen(true);
+              }}
+            >
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path
                   d="M2.5 5H4.16667H17.5"
@@ -95,7 +113,8 @@ const Cart: FC = () => {
               Усього піц: <span>{totalAmount} шт.</span>
             </p>
             <p>
-              Сума замовлення: <span className="-orange">{totalPrice} &#8372;</span>
+              Сума замовлення:{" "}
+              <span className="-orange">{totalPrice} &#8372;</span>
             </p>
           </div>
           <div className="cart_actions">
