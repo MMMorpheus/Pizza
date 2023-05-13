@@ -110,7 +110,7 @@ const Home: FC = () => {
           isFetching={isLoading}
           filterValue={searchValue}
         />
-        <CartNotification isMobile={mobile} />
+        {mobile && <CartNotification isMobile={mobile} />}
       </section>
       
     </>
