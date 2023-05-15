@@ -12,10 +12,9 @@ import styles from "./header.module.scss";
 export const Header: FC = () => {
   const { setSearchValue } = useActions();
   const { searchValue } = useAppSelector(optionsSelector);
-  const { cartPizzas, totalAmount, totalPrice } = useAppSelector(cartSelector);
+  const { cartPizzas } = useAppSelector(cartSelector);
 
   const location = useLocation();
-  console.log(location)
   useEffect(() => {
     const json = JSON.stringify(cartPizzas);
     window.localStorage.setItem("cart", json);

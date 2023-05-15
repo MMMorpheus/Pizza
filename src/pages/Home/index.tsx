@@ -1,80 +1,51 @@
-import { FC, useEffect, useRef } from "react";
+import { FC, useEffect } from "react";
 import {
   Categories,
   Sort,
   PizzasList,
-  categories,
-  options,
   CartNotification,
 } from "../../components";
 
-import { useActions, useAppSelector } from "../../hooks";
+import { useActions, useAppSelector, useReduxQueryParams } from "../../hooks";
 import { optionsSelector } from "../../redux/options/selectors";
 import { pizzasSelector } from "../../redux/pizzas/selectors";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useMediaPredicate } from "react-media-hook";
-import qs from "qs";
 
 import "./home.scss";
 
 const Home: FC = () => {
-  const isMounted = useRef<boolean>(false);
-  const isSeacrched = useRef<boolean>(false);
-  const location = useLocation();
-  const { fetchPizzas, setDefaultOptions, setFilters } = useActions();
+  // Redux actions
+  const { fetchPizzas} = useActions();
+
+  // Redux data and dependecies
   const { pizzas, isLoading } = useAppSelector(pizzasSelector);
-  const { ...params } = useAppSelector(optionsSelector);
-  const navigate = useNavigate();
+  const { category, sortOption, order, haveChanged, searchValue } =
+    useAppSelector(optionsSelector);
 
-  const { category, sortOption, currentPage, order, searchValue, haveChanged } = params;
+  // URL search query string
+  const { search } = useLocation();
 
-  const biggerThen768:boolean = useMediaPredicate('(min-width: 768px)');
-  const mobile:boolean = useMediaPredicate('(max-width: 576px)');
+  // Handling options/filters to URL / parsing into redux options after page reload
+  const { setQueryParams, resetQueryParams, updateReduxOptions } =
+    useReduxQueryParams();
 
-  // Проверяем, если был первый рендер, значит при изменении критериев поиска нужно вшить их в адрессную строку
+  // Media queries UI dependencies
+  // const biggerThen768: boolean = useMediaPredicate("(min-width: 768px)");
+  const mobile: boolean = useMediaPredicate("(max-width: 576px)");
+
   useEffect(() => {
-    
-    if (isMounted.current) {
-      const query = qs.stringify(
-        {
-          page: currentPage,
-          limim: 10,
-          category: category.option === 0 ? "" : category.option,
-          sortBy: sortOption.query,
-          order,
-        },
-        { addQueryPrefix: true }
-      );
-      navigate(query);
+    if (search) {
+      updateReduxOptions(search);
     }
-    isMounted.current = true;
-  }, [category, sortOption, currentPage, order]);
+    fetchPizzas(search);
+  }, [search]);
 
-  // Проверяем, если был первый рендер и! адресная строка именилась, значит нужно ее распарсить, и вшить параметры в редакс
   useEffect(() => {
-    if (location.search && location.pathname === '/') {
-      const serialized = qs.parse(location.search, { ignoreQueryPrefix: true });
-      const optionsData = {
-        category: categories.find(
-          (i) => i.option === Number(serialized.category)
-        ),
-        sortOption: options.find((i) => i.query === serialized.sortBy),
-        order: serialized.order,
-      };
-      setFilters(optionsData)
-      isSeacrched.current = true;
+    if (haveChanged) {
+      setQueryParams();
     }
-    
-  }, []);
-
-  // Проверяем, если приложение первый раз смонитровалось, но параметры поиска не меняли - запрашиваем пиццы. Если уже смонтировалось - делаем всего 1 запрос вместо двух.
-  useEffect(() => {
-    
-    if(!isSeacrched.current) {
-      fetchPizzas(params)
-    }
-    isSeacrched.current = false;
-  }, [category, sortOption, order])
+  }, [haveChanged, category, sortOption, order]);
 
   return (
     <>
@@ -85,10 +56,11 @@ const Home: FC = () => {
       <section className="list_container">
         <div className="container">
           <h1>{category.title} піци</h1>
-          {haveChanged && biggerThen768 && (
+          {/* {haveChanged && biggerThen768 && (
             <button
               onClick={() => {
                 setDefaultOptions();
+                resetQueryParams();
               }}
             >
               Скинути усі фільтри
@@ -96,14 +68,15 @@ const Home: FC = () => {
           )}
           {haveChanged && !biggerThen768 && (
             <button
-            title="reset filters"
+              title="reset filters"
               onClick={() => {
                 setDefaultOptions();
+                resetQueryParams();
               }}
             >
               X
             </button>
-          )}
+          )} */}
         </div>
         <PizzasList
           items={pizzas}
@@ -112,7 +85,6 @@ const Home: FC = () => {
         />
         {mobile && <CartNotification isMobile={mobile} />}
       </section>
-      
     </>
   );
 };
