@@ -11,6 +11,6 @@ export const EmptyCart: FC = () => (
       поверніться на головну сторінку.
     </p>
     <img src="./empty.png"/>
-    <Link to="/Pizza/">Повернутись на головну</Link>
+    <Link to="/main">Повернутись на головну</Link>
   </section>
 );

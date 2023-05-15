@@ -22,11 +22,11 @@ export const Header: FC = () => {
 
   return (
     <header className={styles.header}>
-      <Link to="/Pizza/" className={styles.storeInfo}>
+      <Link to="/main" className={styles.storeInfo}>
         <img
           src="./logo.svg"
           alt="Logo"
-          className={clsx(styles.logo, location.pathname === "/Pizza/cart" && styles['_rotation'])}
+          className={clsx(styles.logo, location.pathname === "/cart" && styles['_rotation'])}
         />
         <div>
           <h2>React Pizza</h2>

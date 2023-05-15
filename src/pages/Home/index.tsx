@@ -16,7 +16,7 @@ import "./home.scss";
 
 const Home: FC = () => {
   // Redux actions
-  const { fetchPizzas} = useActions();
+  const { fetchPizzas } = useActions();
 
   // Redux data and dependecies
   const { pizzas, isLoading } = useAppSelector(pizzasSelector);
