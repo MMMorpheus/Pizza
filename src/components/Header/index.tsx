@@ -12,9 +12,10 @@ import styles from "./header.module.scss";
 export const Header: FC = () => {
   const { setSearchValue } = useActions();
   const { searchValue } = useAppSelector(optionsSelector);
-  const { cartPizzas } = useAppSelector(cartSelector);
+  const { cartPizzas, totalAmount, totalPrice } = useAppSelector(cartSelector);
 
   const location = useLocation();
+  console.log(location)
   useEffect(() => {
     const json = JSON.stringify(cartPizzas);
     window.localStorage.setItem("cart", json);
@@ -22,11 +23,11 @@ export const Header: FC = () => {
 
   return (
     <header className={styles.header}>
-      <Link to="/main" className={styles.storeInfo}>
+      <Link to="/Pizza/" className={styles.storeInfo}>
         <img
           src="./logo.svg"
           alt="Logo"
-          className={clsx(styles.logo, location.pathname === "/cart" && styles['_rotation'])}
+          className={clsx(styles.logo, location.pathname === "/Pizza/cart" && styles['_rotation'])}
         />
         <div>
           <h2>React Pizza</h2>
