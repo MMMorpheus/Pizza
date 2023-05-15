@@ -22,7 +22,7 @@ export const useReduxQueryParams = () => {
       // limim: String(10),
       category: String(category.option === 0 ? "" : category.option),
       sortBy: sortOption.query,
-      order,
+      order: order,
     });
 
   // Reset search params
@@ -38,7 +38,7 @@ export const useReduxQueryParams = () => {
     const optionsData = {
       category: categories.find((i) => i.option === Number(params.category)),
       sortOption: options.find((i) => i.query === params.sortBy),
-      order,
+      order: params.order,
     };
     setFilters(optionsData);
   };
